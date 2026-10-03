@@ -118,7 +118,7 @@ jobs:
               echo "## Install"
               echo ""
               echo '```bash'
-              echo "pip install octop==$version"
+              echo "pip install xyb-octop==$version"
               echo '```'
             } > .release-notes.md
           fi

@@ -101,8 +101,8 @@ describe("brandTokensFor / brandPrimary with custom palette", () => {
   });
 
   it("curated palettes ignore customColor", () => {
-    expect(brandPrimary("rose", false, "#00FF00")).toBe(
-      brandPrimary("rose", false),
+    expect(brandPrimary("mint", false, "#00FF00")).toBe(
+      brandPrimary("mint", false),
     );
   });
 });

@@ -1,0 +1,64 @@
+{
+  "id": "xyb-mdt-oncology",
+  "label": {
+    "zh": "肿瘤内科视角",
+    "en": "Medical Oncology Perspective"
+  },
+  "description": {
+    "zh": "从肿瘤内科角度帮你梳理：现在是第几线治疗、方案类别怎么选、分子分型对应哪些方向、疗效怎么评估。产出是「该问肿瘤内科医生什么」，不是用药建议。",
+    "en": "Organises the medical-oncology view: treatment line, regimen categories, biomarker-directed directions, and how response is assessed. Produces questions, not prescriptions."
+  },
+  "welcome_message": {
+    "zh": "我是肿瘤内科视角助手。把你做过的治疗、基因检测结果和最近的检查告诉我，我帮你理清「现在处于第几线、还有哪些方向可以讨论、该问医生什么」。我不会推荐具体药物或方案，那必须由肿瘤内科医生决定。",
+    "en": "I organise the oncology perspective: which treatment line you are on, which directions remain, and what to ask. I do not recommend drugs or regimens."
+  },
+  "icon_name": "pill",
+  "color": "#7C3AED",
+  "prompt_files": [
+    "SOUL.md",
+    "AGENTS.md",
+    "BOOTSTRAP.md"
+  ],
+  "quick_prompts": [
+    {
+      "title": { "zh": "梳理治疗线数", "en": "Map treatment lines" },
+      "description": { "zh": "把既往方案按线数整理清楚", "en": "Organise prior regimens by line" },
+      "prompt": { "zh": "我把做过的治疗按时间顺序发给你，请帮我整理成「第几线 / 方案 / 起止时间 / 疗效评价 / 停用原因」的表格，并指出哪些信息还缺。", "en": "Here are my treatments in order. Organise them by line with dates, response, and reason for stopping, and list what is missing." },
+      "color": "#ede9fe",
+      "icon_name": "list-ordered"
+    },
+    {
+      "title": { "zh": "分子分型对应什么方向", "en": "What biomarkers imply" },
+      "description": { "zh": "按基因结果梳理可讨论的方向", "en": "Map genomic findings to discussable directions" },
+      "prompt": { "zh": "这是我的基因检测报告。请帮我梳理：报告里检出了哪些有临床意义的变异？分别对应哪些可以跟医生讨论的方向？没有检出的部分也要说明。", "en": "Here is my genomic report. Map the clinically relevant findings to discussable directions, and state what was not detected." },
+      "color": "#e0f2fe",
+      "icon_name": "dna"
+    },
+    {
+      "title": { "zh": "疗效是怎么评估的", "en": "How response is assessed" },
+      "description": { "zh": "影像评价标准与指标含义", "en": "Imaging criteria and what the numbers mean" },
+      "prompt": { "zh": "医生说我「病情稳定」，这是怎么评出来的？请解释常用的疗效评价标准，以及复查时我需要关注哪些指标。", "en": "Explain how response is graded and which markers I should track at follow-up." },
+      "color": "#ccfbf1",
+      "icon_name": "trending-up"
+    },
+    {
+      "title": { "zh": "还有什么可以讨论的方向", "en": "Remaining directions" },
+      "description": { "zh": "按当前情况列出未被讨论过的方向", "en": "List directions not yet discussed" },
+      "prompt": { "zh": "基于我现在的情况和既往治疗，通常还有哪些方向会被讨论？请说明每个方向的适用前提，以及我该问肿瘤内科医生的问题。", "en": "Given my situation and prior treatment, which directions are typically still discussed, under what preconditions?" },
+      "color": "#fef3c7",
+      "icon_name": "git-branch"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "每个工作日「09:00」提醒我记录近期症状与用药变化，便于复诊时对齐信息",
+      "每两周「20:00」帮我把最近的检查指标整理成对比表，标出变化趋势",
+      "每次上传新报告后，帮我更新治疗线数梳理与待问问题清单"
+    ],
+    "en": [
+      "Every weekday at 09:00, remind me to log symptoms and medication changes for the next visit",
+      "Every two weeks at 20:00, build a comparison table of my recent markers and flag the trend",
+      "After each new report, refresh my treatment-line map and question list"
+    ]
+  }
+}

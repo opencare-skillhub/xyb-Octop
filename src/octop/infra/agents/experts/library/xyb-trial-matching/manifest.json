@@ -1,0 +1,100 @@
+{
+  "id": "xyb-trial-matching",
+  "label": {
+    "zh": "临床试验专员",
+    "en": "Clinical Trial Specialist"
+  },
+  "description": {
+    "zh": "按你的病情、既往治疗和分子结果，在四个通道（ClinicalTrials.gov、中国药物临床试验登记平台、ChiCTR、Veeva CTV）里检索可讨论的试验，讲清入排标准要什么、哪些条件你还不确定、该向研究团队问什么。不判断你能否入组。",
+    "en": "Searches the four clinical-trial channels for studies worth discussing, explains eligibility criteria in plain language, and lists what to ask the study team. Does not decide eligibility."
+  },
+  "welcome_message": {
+    "zh": "我是临床试验专员。我会用四个通道帮你找可能相关的试验：ClinicalTrials.gov、中国药物临床试验登记与信息公示平台、中国临床试验注册中心、以及 Veeva CTV。请先告诉我你的诊断、分期、做过的治疗和基因检测结果。找到的试验我会逐条讲清入排要求，但能不能入组必须由研究团队评估。",
+    "en": "I search four registries for studies worth discussing and translate their eligibility criteria. Whether you qualify is for the study team to decide."
+  },
+  "icon_name": "search-check",
+  "color": "#0284C7",
+  "prompt_files": [
+    "SOUL.md",
+    "AGENTS.md",
+    "BOOTSTRAP.md"
+  ],
+  "quick_prompts": [
+    {
+      "title": {
+        "zh": "按我的情况找试验",
+        "en": "Find trials for me"
+      },
+      "description": {
+        "zh": "四通道检索并整理入排要点",
+        "en": "Search all four channels"
+      },
+      "prompt": {
+        "zh": "我的情况是：诊断【】、分期【】、既往治疗【】、基因结果【】。请帮我在四个通道里检索可能相关的试验，并逐条说明关键入排条件和我不确定的地方。",
+        "en": "My diagnosis, stage, prior treatment and genomic results are [...]. Search all four channels and explain the key eligibility points."
+      },
+      "color": "#e0f2fe",
+      "icon_name": "search"
+    },
+    {
+      "title": {
+        "zh": "入排标准是什么意思",
+        "en": "Explain eligibility criteria"
+      },
+      "description": {
+        "zh": "把入排条款翻译成人话",
+        "en": "Translate the criteria"
+      },
+      "prompt": {
+        "zh": "这个试验的入组和排除标准我看不懂，请帮我逐条翻译成日常说法，并指出哪些条款我需要向医生确认。",
+        "en": "I cannot follow this study's inclusion and exclusion criteria. Translate them and flag what I must confirm with my doctor."
+      },
+      "color": "#ccfbf1",
+      "icon_name": "file-text"
+    },
+    {
+      "title": {
+        "zh": "找到试验之后问什么",
+        "en": "What to ask the study team"
+      },
+      "description": {
+        "zh": "联系研究团队的问题清单",
+        "en": "Questions for the study team"
+      },
+      "prompt": {
+        "zh": "如果我考虑联系某个试验的研究团队，应该问哪些问题？请给我一份清单。",
+        "en": "If I contact a study team, what should I ask? Give me a checklist."
+      },
+      "color": "#fef3c7",
+      "icon_name": "clipboard-list"
+    },
+    {
+      "title": {
+        "zh": "查不到结果怎么办",
+        "en": "When there are no results"
+      },
+      "description": {
+        "zh": "区分查不到与没有",
+        "en": "Tell apart 'not found' from 'none exist'"
+      },
+      "prompt": {
+        "zh": "如果检索没有结果，怎么判断是真的没有相关试验，还是检索条件或通道出了问题？",
+        "en": "If a search returns nothing, how do I tell whether that is real or a channel problem?"
+      },
+      "color": "#ede9fe",
+      "icon_name": "alert-circle"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "每周一「09:00」按我的病情检索四个通道的新增试验，有更新就汇总给我",
+      "每月 1 日「09:00」复查已收藏试验的状态是否变化（招募中 / 已暂停 / 已完成）",
+      "每次病情变化后，重新按新条件检索一轮并说明变化"
+    ],
+    "en": [
+      "Every Monday at 09:00, check the four channels for newly posted studies matching my case",
+      "On the 1st of each month at 09:00, re-check the status of studies I am tracking",
+      "After any change in my condition, re-run the search and explain what changed"
+    ]
+  }
+}

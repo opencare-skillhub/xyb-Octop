@@ -32,10 +32,23 @@ function isPalette(value: unknown): value is ThemePalette {
   );
 }
 
+/**
+ * Palette keys that were renamed. `rose` was the default brand before the
+ * xiaoyibao rebrand; anyone who had ever opened the palette picker has it in
+ * localStorage, so the old value must keep working.
+ */
+const RENAMED_PALETTES: Record<string, ThemePalette> = { rose: "mint" };
+
+function migratePalette(value: unknown): ThemePalette | undefined {
+  if (typeof value !== "string") return undefined;
+  const renamed = RENAMED_PALETTES[value];
+  if (renamed) return renamed;
+  return isPalette(value) ? value : undefined;
+}
+
 function readLegacyPalette(): ThemePalette {
   const stored = localStorage.getItem(LEGACY_PALETTE_STORAGE_KEY);
-  if (isPalette(stored)) return stored;
-  return DEFAULT_PALETTE;
+  return migratePalette(stored) ?? DEFAULT_PALETTE;
 }
 
 /**

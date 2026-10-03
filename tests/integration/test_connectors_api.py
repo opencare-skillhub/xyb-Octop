@@ -551,6 +551,42 @@ async def test_patch_custom_mcp_server_default_open_only(env):
     assert "default_open" not in patch_off.json()["servers"]["linear"]
 
 
+async def test_patch_custom_mcp_server_is_audited(env):
+    """PATCH is the one mutating custom-MCP path that used to leave no trace.
+
+    A silent ``enabled: false`` disables every MCP tool of that server for the
+    user and, because the seeder is add-only, looks exactly like a server that
+    was never seeded — so the flip has to be attributable after the fact.
+    """
+    c, srv, auth, _ = env
+    put = await c.put(
+        "/api/connectors/custom-mcp",
+        headers=auth,
+        json={
+            "servers": {
+                "linear": {
+                    "transport": "streamable_http",
+                    "url": "https://mcp.linear.app/mcp",
+                    "enabled": True,
+                }
+            }
+        },
+    )
+    assert put.status_code == 200
+
+    patch = await c.patch(
+        "/api/connectors/custom-mcp/servers/linear",
+        headers=auth,
+        json={"enabled": False},
+    )
+    assert patch.status_code == 200
+
+    rows = srv.services.audit_repo.query(action="connector.custom_mcp.update", limit=10)
+    assert len(rows) == 1
+    assert rows[0].target == "linear"
+    assert rows[0].payload == "enabled=False"
+
+
 async def test_shared_custom_mcp_is_visible_with_collision_safe_name(env):
     c, _, admin_auth, _ = env
     put = await c.put(

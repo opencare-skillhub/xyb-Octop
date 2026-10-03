@@ -1,4 +1,4 @@
-name: Octop Desktop Package
+name: 小胰宝 Desktop Package
 
 # 正式发版：Auto Tag 在打 v* 后与 Release / Docker Publish 一并 dispatch。
 # 产物 upsert 到同一 GitHub Release。手工补包：workflow_dispatch + release_tag
@@ -288,14 +288,14 @@ jobs:
           wails3 task package
           ARCH=${{ matrix.arch }}
           VERSION=${{ env.OCTOP_VERSION }}
-          PORTABLE_ZIP=../portable/release/Octop-portable-${{ matrix.plat }}-${{ env.OCTOP_VERSION }}.zip
+          PORTABLE_ZIP=../portable/release/xyb-octop-portable-${{ matrix.plat }}-${{ env.OCTOP_VERSION }}.zip
 
       # archive: false — upload the prebuilt zip as-is. Default archive=true would
       # wrap it again, so Actions UI / "Download artifact" becomes zip-in-zip.
       # With archive:false, artifact name is the filename (name: is ignored).
       - uses: actions/upload-artifact@v7
         with:
-          path: desktop/portable/release/Octop-portable-${{ matrix.plat }}-${{ env.OCTOP_VERSION }}.zip
+          path: desktop/portable/release/xyb-octop-portable-${{ matrix.plat }}-${{ env.OCTOP_VERSION }}.zip
           archive: false
           if-no-files-found: error
           retention-days: 14
@@ -303,7 +303,7 @@ jobs:
       - name: Upload bundled desktop package
         uses: actions/upload-artifact@v7
         with:
-          path: desktop/src/bin/Octop-desktop-${{ matrix.plat }}-${{ env.OCTOP_VERSION }}.*
+          path: desktop/src/bin/xyb-octop-desktop-${{ matrix.plat }}-${{ env.OCTOP_VERSION }}.*
           archive: false
           if-no-files-found: error
           retention-days: 14

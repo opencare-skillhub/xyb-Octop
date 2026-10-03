@@ -80,7 +80,7 @@ OPENAPI_TAGS: list[dict[str, str]] = [
     },
     {
         "name": "bridge",
-        "description": "Link this Octop to remote Octop instances (HTTP tunnel + remote chat).",
+        "description": "Link this 小胰宝 to remote 小胰宝 instances (HTTP tunnel + remote chat).",
     },
     {
         "name": "knowledge",

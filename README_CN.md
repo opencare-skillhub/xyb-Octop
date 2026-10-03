@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/readme-banner-zh.png" alt="Octop Banner" width="600" />
+  <img src="docs/assets/readme-banner-zh.png" alt="小胰宝 Banner" width="600" />
 </p>
 
 <p align="center">
@@ -8,18 +8,18 @@
 
 <p align="center">
   <a href="https://trendshift.io/repositories/95504?utm_source=repository-badge&utm_medium=badge&utm_campaign=badge-repository-95504" target="_blank" rel="noopener noreferrer">
-    <img src="https://trendshift.io/api/badge/repositories/95504" alt="TencentCloud/Octop | Trendshift" width="250" height="55" />
+    <img src="https://trendshift.io/api/badge/repositories/95504" alt="TencentCloud/小胰宝 | Trendshift" width="250" height="55" />
   </a>
 </p>
 
 <p align="center">
   <a href="https://www.python.org/downloads/"><img alt="Python 3.12+" src="https://img.shields.io/badge/python-3.12%2B-blue?logo=python&logoColor=white" /></a>
-  <a href="https://github.com/TencentCloud/Octop/blob/main/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green" /></a>
-  <a href="https://github.com/TencentCloud/Octop/releases"><img alt="Version" src="https://img.shields.io/badge/version-1.0.2b5-orange" /></a>
+  <a href="https://github.com/TencentCloud/小胰宝/blob/main/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green" /></a>
+  <a href="https://github.com/TencentCloud/小胰宝/releases"><img alt="Version" src="https://img.shields.io/badge/version-1.0.2b5-orange" /></a>
   <a href="https://pypi.org/project/octop/"><img src="https://img.shields.io/pypi/v/octop" alt="PyPI" /></a>
   <a href="https://github.com/astral-sh/ruff"><img alt="Code Style: Ruff" src="https://img.shields.io/badge/code%20style-ruff-000000?logo=ruff&logoColor=white" /></a>
-  <a href="https://github.com/TencentCloud/Octop"><img alt="GitHub stars" src="https://img.shields.io/github/stars/TencentCloud/Octop?style=social" /></a>
-  <a href="https://github.com/TencentCloud/Octop/fork"><img alt="GitHub forks" src="https://img.shields.io/github/forks/TencentCloud/Octop?style=social" /></a>
+  <a href="https://github.com/TencentCloud/小胰宝"><img alt="GitHub stars" src="https://img.shields.io/github/stars/TencentCloud/小胰宝?style=social" /></a>
+  <a href="https://github.com/TencentCloud/小胰宝/fork"><img alt="GitHub forks" src="https://img.shields.io/github/forks/TencentCloud/小胰宝?style=social" /></a>
 </p>
 
 <p align="center">
@@ -38,7 +38,7 @@
 
 ---
 
-**Octop** 是一个开源、自托管的 AI 助手。它不仅是工具，更是可并行运作的数字生命体。通过多 Agent 架构，它为团队、家庭和个人构建了既独立又协作的智能环境。并且这一切都运行在你的机器上——完全自托管的设计让隐私不再是妥协，而单进程启动的便捷性，则让强大的 Web 控制台、CLI 与 IM 集成触手可及。
+**小胰宝** 是一个开源、自托管的 AI 助手。它不仅是工具，更是可并行运作的数字生命体。通过多 Agent 架构，它为团队、家庭和个人构建了既独立又协作的智能环境。并且这一切都运行在你的机器上——完全自托管的设计让隐私不再是妥协，而单进程启动的便捷性，则让强大的 Web 控制台、CLI 与 IM 集成触手可及。
 
 借助飞书、钉钉、QQ、微信、企业微信或 HTTP/SSE/WebSocket API 与任意 Agent 对话；通过**专家库**一键创建专业角色，通过 **Connector**（OAuth + MCP）接入外部服务，通过 **ACP** 与 IDE / 终端 AI 工具双向协作。
 
@@ -53,7 +53,7 @@
 | 🔒 | **更安全** | JWT 多用户隔离、工具审批、Shell 命令防护与敏感信息脱敏，数据留在本地 |
 | 🔌 | **Connector 拓展体系** | 一键接入腾讯全家桶（文档 / 会议 / 新闻等），OAuth 与 MCP 网关轻松扩展 |
 | 💾 | **可插拔工作区后端** | 本地目录、Docker 沙箱、PostgreSQL 或 COS/S3 存放 Agent 文件 — 与控制面数据库分离 |
-| 🧠 | **可迁移记忆系统** | 基于 [Octop Memory](https://github.com/TencentCloud/octop-memory)，记忆随工作区迁移 |
+| 🧠 | **可迁移记忆系统** | 基于 [小胰宝 Memory](https://github.com/TencentCloud/octop-memory)，记忆随工作区迁移 |
 | 📚 | **知识库** | 基于文档的 RAG 检索；支持同实例共享语料，让回答锚定私有知识 |
 | 🧩 | **插件** | 支持第三方插件扩展；内置插件随安装注入，按需一键启用 |
 | ↔️ | **ACP 双向集成** | `octop acp` 增强 IDE 与终端 AI；对话中委派 OpenCode / Claude Code 等 |
@@ -65,12 +65,12 @@
 
 ## 📌 概述
 
-Octop 是面向家庭与小团队的自托管 AI 助手平台。单进程同时提供 Web 控制台、CLI、IM 通道（飞书、钉钉、QQ、微信、企业微信等）与定时任务，共享 `~/.octop/` 下的控制面数据库（默认 SQLite；可选 PostgreSQL）。
+小胰宝 是面向家庭与小团队的自托管 AI 助手平台。单进程同时提供 Web 控制台、CLI、IM 通道（飞书、钉钉、QQ、微信、企业微信等）与定时任务，共享 `~/.octop/` 下的控制面数据库（默认 SQLite；可选 PostgreSQL）。
 
-> Octop 的设计目标：让每一次对话、工作区与凭据都留在你自己的机器上，同时为每个用户配备一组可按场景切换的专业 Agent。
+> 小胰宝 的设计目标：让每一次对话、工作区与凭据都留在你自己的机器上，同时为每个用户配备一组可按场景切换的专业 Agent。
 
 <details>
-<summary>🐾 你能用 Octop 做什么</summary>
+<summary>🐾 你能用 小胰宝 做什么</summary>
 
 - **个人助理** — 让专属 Agent 帮你写周报、整理资料、定日程，记忆随工作区长期保留。
 - **家庭共享** — 一个管理员账号，全家共用；按成员分配不同 Agent 与专家角色，也可共享专家与知识库。
@@ -89,22 +89,22 @@ Octop 是面向家庭与小团队的自托管 AI 助手平台。单进程同时�
 |------|------|
 | **语言** | Python 3.12+ |
 | **Web 框架** | FastAPI + uvicorn |
-| **Agent 运行时** | [Octop Harness](https://github.com/TencentCloud/octop-harness) |
-| **IM 桥接** | [Octop Gateway](https://github.com/TencentCloud/octop-gateway) |
+| **Agent 运行时** | [小胰宝 Harness](https://github.com/TencentCloud/octop-harness) |
+| **IM 桥接** | [小胰宝 Gateway](https://github.com/TencentCloud/octop-gateway) |
 | **控制平面数据库** | SQLite (WAL，默认) 或 PostgreSQL（可选） |
 | **前端** | React 18 + TypeScript + Vite + Ant Design |
 | **调度** | APScheduler |
 | **ACP** | agent-client-protocol |
 | **构建 / 质量** | hatchling · ruff · mypy · pytest |
 
-Octop 基于一系列 Octop Harness 工程实践构建——它将这些专注的运行时组合进同一个进程：
+小胰宝 基于一系列 小胰宝 Harness 工程实践构建——它将这些专注的运行时组合进同一个进程：
 
-- **[Octop Harness](https://github.com/TencentCloud/octop-harness)** — Agent 运行时：模型路由、工具、技能与对话检查点。
-- **[Octop Gateway](https://github.com/TencentCloud/octop-gateway)** — 多平台 IM 通道桥接，将各类入站消息归一为统一的处理管线。
-- **[Octop Memory](https://github.com/TencentCloud/octop-memory)** — 分层记忆与全文检索，让 Agent 的记忆随工作区一同迁移。
-- **[Octop Browser](https://github.com/TencentCloud/octop-browser)** — 基于 CDP 的浏览器自动化，支持持久化配置，用于网页类任务。
+- **[小胰宝 Harness](https://github.com/TencentCloud/octop-harness)** — Agent 运行时：模型路由、工具、技能与对话检查点。
+- **[小胰宝 Gateway](https://github.com/TencentCloud/octop-gateway)** — 多平台 IM 通道桥接，将各类入站消息归一为统一的处理管线。
+- **[小胰宝 Memory](https://github.com/TencentCloud/octop-memory)** — 分层记忆与全文检索，让 Agent 的记忆随工作区一同迁移。
+- **[小胰宝 Browser](https://github.com/TencentCloud/octop-browser)** — 基于 CDP 的浏览器自动化，支持持久化配置，用于网页类任务。
 
-Octop 不依赖外部消息队列或中间件，而是通过进程内的 `HarnessProcessor` 统一路由所有入口——Web UI、IM 与定时任务。最终呈现为一个可重启恢复的单进程：启动时整个状态都从控制面数据库重建（默认 `~/.octop/octop.db`，亦可配置 PostgreSQL）。
+小胰宝 不依赖外部消息队列或中间件，而是通过进程内的 `HarnessProcessor` 统一路由所有入口——Web UI、IM 与定时任务。最终呈现为一个可重启恢复的单进程：启动时整个状态都从控制面数据库重建（默认 `~/.octop/octop.db`，亦可配置 PostgreSQL）。
 
 ## 🤔 功能特性
 
@@ -138,14 +138,14 @@ Octop 不依赖外部消息队列或中间件，而是通过进程内的 `Harnes
 
 ### ACP（Agent Client Protocol）
 
-Octop 支持两个方向的 ACP 集成：
+小胰宝 支持两个方向的 ACP 集成：
 
-1. **入站** — 外部工具使用**你的** Octop Agent
+1. **入站** — 外部工具使用**你的** 小胰宝 Agent
    ```bash
    octop acp --agent main   # 为 Zed、OpenCode 等提供 stdio ACP 服务
    ```
 
-2. **出站** — Octop 委派给外部编程 Agent
+2. **出站** — 小胰宝 委派给外部编程 Agent
    - 控制台 → **ACP**（`/acp`）：配置 Runner（按用户全局）
    - 为 Agent 启用 **acp_runner** 后，在对话中委派任务
 
@@ -171,9 +171,9 @@ Octop 支持两个方向的 ACP 集成：
 - [ ] **自进化能力** — 将日常对话自动沉淀为技能，让助手随使用不断成长。
 - [ ] **Managed Agents** — 平台托管的 Agent 生命周期（开通、伸缩与运维），无需自行维护完整自托管栈。
 - [ ] **Project** — 以项目为边界组织 Agent、文件与会话，围绕同一目标协作。
-- [ ] **云边端一体** — 本地运行 Octop，同时可将选定任务调度到云端执行：轻量工作留在本地，重活按需上云。
-- [ ] **插件市场** — 搭建插件市场，支持在 Octop 内发现、安装与更新第三方插件。
-- [ ] **对话式控制面** — 完善 Octop 自身 Skill，让对话即可覆盖当前控制台的完整能力：创建专家、配置通道、管理知识库，并支持开发插件。
+- [ ] **云边端一体** — 本地运行 小胰宝，同时可将选定任务调度到云端执行：轻量工作留在本地，重活按需上云。
+- [ ] **插件市场** — 搭建插件市场，支持在 小胰宝 内发现、安装与更新第三方插件。
+- [ ] **对话式控制面** — 完善 小胰宝 自身 Skill，让对话即可覆盖当前控制台的完整能力：创建专家、配置通道、管理知识库，并支持开发插件。
 
 规划会随社区发展动态调整，以上仅供参考。
 
@@ -223,14 +223,14 @@ curl -fsSL https://finnie-1258344699.cos.ap-guangzhou.myqcloud.com/octop/install
 
 完整安装选项见 [scripts/README.md](scripts/README.md)（`--version`、`--from-source`、`--mirror` 及 Windows 参数）。
 
-**桌面客户端**（图形界面，无需终端）— 从 [GitHub Releases](https://github.com/TencentCloud/Octop/releases/latest) 下载对应平台的安装包：
+**桌面客户端**（图形界面，无需终端）— 从 [GitHub Releases](https://github.com/TencentCloud/小胰宝/releases/latest) 下载对应平台的安装包：
 
 | 平台 | 制品 |
 |------|------|
-| Windows | `Octop-desktop-windows-amd64-<version>.exe`（64 位）/ `Octop-desktop-windows-arm64-<version>.exe`（ARM64）— NSIS 安装程序 |
-| macOS | `Octop-desktop-darwin-arm64-<version>.dmg`（Apple 芯片）/ `Octop-desktop-darwin-amd64-<version>.dmg`（Intel） |
-| Linux | `Octop-desktop-linux-amd64-<version>.tar.gz` / `Octop-desktop-linux-arm64-<version>.tar.gz` |
-| 飞牛 NAS（FnOS） | `Octop-fnos-docker-<version>.fpk`（依赖 Docker）/ `Octop-fnos-native-<version>.fpk`（无需 Docker）— 通过应用中心安装 |
+| Windows | `小胰宝-desktop-windows-amd64-<version>.exe`（64 位）/ `小胰宝-desktop-windows-arm64-<version>.exe`（ARM64）— NSIS 安装程序 |
+| macOS | `小胰宝-desktop-darwin-arm64-<version>.dmg`（Apple 芯片）/ `小胰宝-desktop-darwin-amd64-<version>.dmg`（Intel） |
+| Linux | `小胰宝-desktop-linux-amd64-<version>.tar.gz` / `小胰宝-desktop-linux-arm64-<version>.tar.gz` |
+| 飞牛 NAS（FnOS） | `小胰宝-fnos-docker-<version>.fpk`（依赖 Docker）/ `小胰宝-fnos-native-<version>.fpk`（无需 Docker）— 通过应用中心安装 |
 
 桌面客户端说明见 [desktop/README.md](desktop/README.md)，飞牛打包指南见 [fnos/README.md](fnos/README.md)。
 
@@ -256,6 +256,8 @@ uv sync --extra local-embedding
 octop init
 ```
 
+`xyb-octop` 是同一套 CLI 的品牌别名 —— 本文中所有 `octop …` 命令都可以写成 `xyb-octop …`。
+
 交互式向导会在 `~/.octop/` 下创建 SQLite 数据库、JWT 密钥，并引导你设置首个管理员账号。
 
 ### 3. 启动
@@ -263,6 +265,8 @@ octop init
 ```bash
 # 前台运行（API + Web 控制台）
 octop run
+# 或使用别名；源码检出时用 uv：
+uv run xyb-octop run
 
 # 自定义主机与端口
 octop run --host 0.0.0.0 --port 8088
@@ -314,6 +318,7 @@ docker run -d \
 - **部署与使用**
   - [安装方式](#-安装方式)
   - [配置](#️-配置)
+  - [MCP 服务](#-mcp-服务)
   - [CLI 参考](#-cli-参考)
   - [Web 控制台](#️-web-控制台)
   - [数据目录](#-数据目录)
@@ -347,7 +352,7 @@ docker run -d \
 `octop update` 只替换 wheel / 二进制，你的 `~/.octop/` 数据库、工作区、密钥与 `config.json` 均会保留：
 
 ```bash
-octop update          # 获取并安装最新版 Octop，若已注册系统服务则自动重启
+octop update          # 获取并安装最新版 小胰宝，若已注册系统服务则自动重启
 ```
 
 数据库结构会在下次启动时自动迁移；仅当设置向导提示需要迁移时才运行 `octop init`。跨版本升级前请务必先备份（`octop backup`）。
@@ -393,12 +398,59 @@ OpenAI 兼容 API、DashScope（千问）、Ollama 等预设 — 在控制台或
 
 其他通道类型（如元宝、小艺、MQTT 等）可通过网关接入 — 详见控制台或 CLI 的通道配置。
 
+## 🔌 MCP 服务
+
+小胰宝为临床试验相关专家预置了一批临床 MCP 服务。它们**不会随安装自动启用**，
+用一条命令为某个用户播种：
+
+```bash
+octop xyb init-mcp --user admin            # 只增不改，可重复执行
+octop xyb init-mcp --user admin --dry-run  # 只打印计划，不写入
+octop xyb init-mcp --user admin --only xyb-veeva
+```
+
+| 服务 | 通道 | 传输 | 前置条件 |
+|------|------|------|----------|
+| `xyb-clinicaltrials` | ClinicalTrials.gov | `npx`（stdio） | 无 — 公开数据源 |
+| `xyb-chictr` | 中国临床试验注册中心 | `npx`（stdio） | 首次运行需下载 npm 包与 Playwright Chromium（约 570 MB）；站点可能要求人工验证 |
+| `xyb-veeva` | Veeva CTV | 本地 `node`（stdio） | 需本地 `ctv-mcp-server` 源码并已构建；用 `XYB_VEEVA_DIR` 指向它 |
+| `xyb-pubmed` | PubMed 文献 | `npx`（stdio） | 无 — `PUBMED_API_KEY` 可提高额度 |
+| `xyb-metaso` | 秘塔通用检索 | `npx`（stdio） | 需 `METASO_API_KEY`，未配置时跳过 |
+| `xyb-dayi` | 日大医用药与疾病查询 | `npx`（stdio） | 无 — 公开检索 |
+
+播种出来的服务同时带 `enabled` 与 `default_open`，因此每轮对话都会自动挂载，
+不需要每次手动勾选。播种是**只增不改**的：同名配置永不覆盖；前置条件不满足的服务
+会被如实报告，而不是写成一个启动就报错的命令。
+
+`chinadrugs` 有意**不**作为 MCP 播种 —— 它以 `chinadrugs-collect` CLI 技能形式分发，
+用患者自己的浏览器会话访问登记平台。
+
+自定义服务可在控制台（**连接器 → 自定义 MCP**）添加，或走
+`PUT /api/connectors/custom-mcp`；保存前可用
+`POST /api/connectors/custom-mcp/test` 探测连通性。
+
+不需要 LLM、也不需要服务在跑即可校验（按连接器网关同样的方式直接说 MCP over stdio）：
+
+```bash
+scripts/xyb-check-mcp.sh --list      # 列出已知服务与启动命令，不启动任何进程
+scripts/xyb-check-mcp.sh xyb-veeva   # 真实 initialize + tools/list 握手
+scripts/xyb-check-mcp.sh --json      # 机器可读报告
+```
+
+它会报出服务**实际**返回的 `serverInfo.version` 与工具数，版本漂移因此可见，
+而不是靠假设。仅 `xyb-veeva` 一个就提供 12 个工具 —— `search_studies`、
+`get_study_detail`（37 字段，含纳排标准）、`export_rag`、`generate_report`、
+订阅巡检查询等。
+
+想把整件事交给 AI 完成：**[docs/xyb-mcp-setup.md](docs/xyb-mcp-setup.md)**
+提供一句话提示词，以及手工兜底步骤与验证方法。
+
 ## 📖 CLI 参考
 
 | 命令 | 说明 |
 |------|------|
 | `octop init` | 初始化 `~/.octop/`（数据库、管理员、JWT 密钥） |
-| `octop run` | 前台启动 Octop |
+| `octop run` | 前台启动 小胰宝 |
 | `octop service start` | 安装并启动系统服务 |
 | `octop service stop` | 停止系统服务 |
 | `octop agent` | 创建、列出、启停 Agent |
@@ -428,7 +480,7 @@ OpenAI 兼容 API、DashScope（千问）、Ollama 等预设 — 在控制台或
 `octop run` 启动后访问 **http://127.0.0.1:8088**。
 
 <p align="center">
-  <img src="docs/assets/readme-chat-zh.png" alt="Octop Web 控制台" width="800" />
+  <img src="docs/assets/readme-chat-zh.png" alt="小胰宝 Web 控制台" width="800" />
 </p>
 
 - **对话** — 与专家 / 团队实时聊天
@@ -548,10 +600,10 @@ cd dashboard && npx tsc -b
 
 | 项目 | 描述 |
 |------|------|
-| [Octop Harness](https://github.com/TencentCloud/octop-harness) | Agent 运行时 — 模型路由、工具、Skill、检查点 |
-| [Octop Gateway](https://github.com/TencentCloud/octop-gateway) | 多平台 IM 通道桥接 |
-| [Octop Memory](https://github.com/TencentCloud/octop-memory) | 层级召回与全文搜索 |
-| [Octop Browser](https://github.com/TencentCloud/octop-browser) | CDP 浏览器自动化，支持 profile 持久登录 |
+| [小胰宝 Harness](https://github.com/TencentCloud/octop-harness) | Agent 运行时 — 模型路由、工具、Skill、检查点 |
+| [小胰宝 Gateway](https://github.com/TencentCloud/octop-gateway) | 多平台 IM 通道桥接 |
+| [小胰宝 Memory](https://github.com/TencentCloud/octop-memory) | 层级召回与全文搜索 |
+| [小胰宝 Browser](https://github.com/TencentCloud/octop-browser) | CDP 浏览器自动化，支持 profile 持久登录 |
 
 ## 💬 客户企业微信群
 

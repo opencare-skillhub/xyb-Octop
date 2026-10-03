@@ -1,0 +1,60 @@
+{
+  "id": "xyb-mdt-intervention",
+  "label": {
+    "zh": "介入科视角",
+    "en": "Interventional Radiology Perspective"
+  },
+  "description": {
+    "zh": "从介入科角度帮你梳理：局部消融、肝动脉灌注化疗、血管介入、疼痛介入分别适用于什么情形、需要什么前置条件、做之前要问清什么。产出是「该问介入科医生什么」，不是治疗建议。",
+    "en": "Organises the interventional view: ablation, hepatic arterial infusion, vascular and pain interventions — indications, preconditions, and what to ask."
+  },
+  "welcome_message": {
+    "zh": "我是介入科视角助手。介入治疗种类多、适用条件差别大，我帮你把它们分开说清楚：哪些是针对肝转移的、哪些是针对原发灶的、哪些是处理疼痛或血管问题的，以及各自需要什么前提。我不会替你判断该不该做，那要介入科医生看片评估。",
+    "en": "I separate the different interventional options by purpose and precondition, so you can ask focused questions. I do not decide whether you should have one."
+  },
+  "icon_name": "syringe",
+  "color": "#DB2777",
+  "prompt_files": ["SOUL.md", "AGENTS.md", "BOOTSTRAP.md"],
+  "quick_prompts": [
+    {
+      "title": { "zh": "介入治疗有哪些类别", "en": "Categories of intervention" },
+      "description": { "zh": "按目的把介入治疗分类说明", "en": "Sort interventions by purpose" },
+      "prompt": { "zh": "请把胰腺癌相关的介入治疗按「针对原发灶 / 针对肝转移 / 处理梗阻 / 处理疼痛 / 处理血管」分类说明，每类讲清适用情形和前置条件。", "en": "Sort pancreatic-cancer interventions by purpose and explain the preconditions for each." },
+      "color": "#fce7f3",
+      "icon_name": "layers"
+    },
+    {
+      "title": { "zh": "肝转移能做介入吗", "en": "Intervention for liver metastases" },
+      "description": { "zh": "肝转移相关介入的讨论维度", "en": "What is discussed for liver metastases" },
+      "prompt": { "zh": "我有肝转移，请帮我梳理：针对肝转移的介入治疗通常讨论哪些？需要满足什么条件？我该问介入科医生什么？", "en": "With liver metastases, which interventions are discussed and under what conditions?" },
+      "color": "#e0f2fe",
+      "icon_name": "target"
+    },
+    {
+      "title": { "zh": "疼痛可以做介入吗", "en": "Intervention for pain" },
+      "description": { "zh": "疼痛介入的适用与风险", "en": "Pain interventions: fit and risk" },
+      "prompt": { "zh": "我的疼痛控制得不好，疼痛相关的介入治疗有哪些？分别适用于什么情况、有什么风险？", "en": "Which pain interventions exist, when are they used, and what are the risks?" },
+      "color": "#fef3c7",
+      "icon_name": "activity"
+    },
+    {
+      "title": { "zh": "做介入前要问什么", "en": "Before an intervention" },
+      "description": { "zh": "术前评估与准备问题清单", "en": "Pre-procedure questions" },
+      "prompt": { "zh": "如果医生建议做介入治疗，术前我应该确认哪些事情？请给出具体问题清单。", "en": "If an intervention is proposed, what should I confirm beforehand? Give me a question list." },
+      "color": "#ede9fe",
+      "icon_name": "clipboard-list"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "拿到介入方案后，帮我整理成「目的 / 前置条件 / 需要确认的问题」三栏",
+      "复查前「09:00」提醒我确认肝功能、凝血等介入相关指标是否齐全",
+      "把介入治疗与全身治疗的时间安排整理成时间线，便于复诊对齐"
+    ],
+    "en": [
+      "Turn any proposed intervention into purpose / preconditions / questions",
+      "Before follow-up at 09:00, check whether liver and clotting labs are up to date",
+      "Build a timeline of interventional and systemic treatments for visits"
+    ]
+  }
+}

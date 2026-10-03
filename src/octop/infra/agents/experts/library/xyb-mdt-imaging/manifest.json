@@ -1,0 +1,64 @@
+{
+  "id": "xyb-mdt-imaging",
+  "label": {
+    "zh": "影像科视角",
+    "en": "Radiology Perspective"
+  },
+  "description": {
+    "zh": "从影像科角度帮你读懂报告：为什么增强 CT 是分期的核心、血管关系和分档依据写在哪、报告里哪些字段最关键、下次复查需要注意什么技术要求。产出是「该问影像科或主管医生什么」。",
+    "en": "Explains what an imaging report contains: why contrast CT drives staging, where vascular relationships are recorded, and which fields matter. Produces questions, not reads."
+  },
+  "welcome_message": {
+    "zh": "我是影像科视角助手。把你的 CT / MRI / 超声内镜报告文字发给我，我帮你把报告里真正影响判断的字段挑出来，解释每个字段在说什么，并列出你该向医生确认的问题。我不看片子本身，报告没写的我会直接说未提供。",
+    "en": "I work from the report text, not the images. I extract the fields that change management and explain them."
+  },
+  "icon_name": "scan",
+  "color": "#0EA5E9",
+  "prompt_files": [
+    "SOUL.md",
+    "AGENTS.md",
+    "BOOTSTRAP.md"
+  ],
+  "quick_prompts": [
+    {
+      "title": { "zh": "读懂影像报告", "en": "Read my imaging report" },
+      "description": { "zh": "逐字段解释报告在说什么", "en": "Explain each field of the report" },
+      "prompt": { "zh": "这是我的影像报告文字。请逐字段帮我解释：每个描述在说什么、为什么医生关心它、报告里有没有漏掉关键项。", "en": "Here is my report text. Explain each field, why it matters, and what key items are missing." },
+      "color": "#e0f2fe",
+      "icon_name": "file-text"
+    },
+    {
+      "title": { "zh": "血管关系怎么看", "en": "Vascular relationships" },
+      "description": { "zh": "肿瘤与主要血管的接触描述", "en": "How tumour-vessel contact is described" },
+      "prompt": { "zh": "报告里提到肿瘤与血管的关系，请帮我梳理这些描述分别是什么意思，以及为什么它对判断可切除性很重要。", "en": "Explain the tumour-vessel descriptions and why they matter for resectability." },
+      "color": "#ccfbf1",
+      "icon_name": "git-merge"
+    },
+    {
+      "title": { "zh": "该做什么检查、怎么准备", "en": "Which scan and how to prepare" },
+      "description": { "zh": "检查选择与准备要求", "en": "Scan choice and preparation" },
+      "prompt": { "zh": "胰腺的复查通常用哪些影像检查？各自的优缺点是什么？做增强 CT / MRI 前后需要注意什么准备？", "en": "Which imaging modalities are used for pancreatic follow-up, and how should I prepare?" },
+      "color": "#fef3c7",
+      "icon_name": "clipboard-list"
+    },
+    {
+      "title": { "zh": "把报告整理成问题清单", "en": "Turn the report into questions" },
+      "description": { "zh": "输出该问医生的问题", "en": "Produce questions for my doctor" },
+      "prompt": { "zh": "请基于我的影像报告，列出我下次见医生时应该确认的 3–5 个具体问题。", "en": "Based on my report, list 3-5 specific questions for my next appointment." },
+      "color": "#ede9fe",
+      "icon_name": "help-circle"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "每次拿到影像报告后，帮我按关键字段拆分并标出缺失项",
+      "每个复查周期前「09:00」提醒我确认需要做的影像检查与准备事项",
+      "把多次影像报告的关键描述做成时间线，便于复诊时对比"
+    ],
+    "en": [
+      "After each report, break it into key fields and flag what is missing",
+      "Before each follow-up cycle at 09:00, remind me which scan and preparation I need",
+      "Build a timeline of key findings across reports for comparison at visits"
+    ]
+  }
+}

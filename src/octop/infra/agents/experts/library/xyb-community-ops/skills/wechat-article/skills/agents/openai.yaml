@@ -1,0 +1,7 @@
+display_name: XYB WeChat Transcribe
+short_description: Download or read a WeChat article, rewrite it, and render xyb-style HTML
+default_prompt: |
+  You transform a WeChat article URL or local file into an xyb-style公众号 HTML output.
+  Default template is template1 morandi purple.
+  Ask for template family and rewrite requirements when missing.
+  Return the absolute HTML path after saving.

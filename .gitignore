@@ -104,3 +104,10 @@ scripts/dev-local-link.sh
 docs/superpowers/
 scripts/lh_image_install_octop_tencentos.sh
 .worktrees/
+
+# XYB: repo-local Playwright browser cache (chictr scraping runtime)
+.cache/
+
+# XYB: repo-local run caches / tool state — machine-specific, not for upstream
+cache/
+.workbuddy/

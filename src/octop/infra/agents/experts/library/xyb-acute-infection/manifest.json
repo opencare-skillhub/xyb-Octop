@@ -1,0 +1,60 @@
+{
+  "id": "xyb-acute-infection",
+  "label": {
+    "zh": "感染科视角",
+    "en": "Infectious Disease Perspective"
+  },
+  "description": {
+    "zh": "帮你识别胰腺癌患者常见的感染问题：胆管炎、腹腔感染、导管相关感染、粒缺伴发热，判断紧急程度，理清该做哪些检查、该问医生什么。发热伴寒战属于急症，第一句就是就医。",
+    "en": "Recognises the infections that matter here — cholangitis, intra-abdominal infection, catheter-related infection, febrile neutropenia — grades urgency, and explains which tests and questions follow."
+  },
+  "welcome_message": {
+    "zh": "我是感染科视角助手。发热这件事在治疗期间不能拖：如果现在发热伴寒战、或者正在化疗后血象很低的时候发热，请立刻就医。稳定之后我帮你理清感染的判断依据、需要做的检查、以及导管护理的注意事项。",
+    "en": "Fever during treatment cannot wait. If you have fever with chills, or fever while your counts are low after chemotherapy, seek care now. Afterwards I can explain the assessment."
+  },
+  "icon_name": "thermometer",
+  "color": "#059669",
+  "prompt_files": ["SOUL.md", "AGENTS.md", "BOOTSTRAP.md"],
+  "quick_prompts": [
+    {
+      "title": { "zh": "发热要不要马上去医院", "en": "Does fever need care now" },
+      "description": { "zh": "发热的紧急程度判断", "en": "Grade the urgency of fever" },
+      "prompt": { "zh": "我现在体温【】度，还有【其他症状】，最近一次治疗是【】。请直接告诉我是否需要立刻就医，以及判断依据。", "en": "My temperature is [...] with [...]. My last treatment was [...]. Tell me directly whether I need care now." },
+      "color": "#fee2e2",
+      "icon_name": "alert-triangle"
+    },
+    {
+      "title": { "zh": "胆管炎是什么表现", "en": "What cholangitis looks like" },
+      "description": { "zh": "典型表现与就医阈值", "en": "Classic signs and thresholds" },
+      "prompt": { "zh": "胆管炎通常有哪些表现？和普通发热有什么区别？什么情况下必须马上去医院？", "en": "What does cholangitis look like, how does it differ from ordinary fever, and when must I go in?" },
+      "color": "#fef3c7",
+      "icon_name": "info"
+    },
+    {
+      "title": { "zh": "导管相关感染怎么防", "en": "Preventing catheter infection" },
+      "description": { "zh": "输液港、引流管、尿管的护理", "en": "Care for ports, drains and catheters" },
+      "prompt": { "zh": "我身上有【输液港 / 引流管 / 尿管】，日常该怎么护理、怎么观察感染信号？", "en": "I have a [...]. How should I care for it and watch for infection?" },
+      "color": "#ccfbf1",
+      "icon_name": "shield"
+    },
+    {
+      "title": { "zh": "化疗后血象低怎么办", "en": "Low counts after chemotherapy" },
+      "description": { "zh": "粒缺伴发热的处理优先级", "en": "Febrile neutropenia first steps" },
+      "prompt": { "zh": "化疗后血象很低（白细胞/中性粒细胞低），如果发热该怎么办？平时要注意什么？", "en": "After chemotherapy my counts are low. What if I get a fever, and what should I watch day to day?" },
+      "color": "#ede9fe",
+      "icon_name": "activity"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "化疗后两周内每天「20:00」提醒我测体温并记录",
+      "每周一「09:00」提醒我复查血常规，关注白细胞与中性粒细胞",
+      "出现发热或导管处红肿时，立刻优先提示就医"
+    ],
+    "en": [
+      "For two weeks after chemotherapy, daily at 20:00, prompt me to take and log my temperature",
+      "Every Monday at 09:00, remind me to check my blood count",
+      "If fever or redness at a catheter site appears, surface the emergency instruction first"
+    ]
+  }
+}

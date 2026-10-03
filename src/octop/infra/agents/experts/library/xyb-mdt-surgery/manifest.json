@@ -1,0 +1,64 @@
+{
+  "id": "xyb-mdt-surgery",
+  "label": {
+    "zh": "胰腺外科视角",
+    "en": "Pancreatic Surgery Perspective"
+  },
+  "description": {
+    "zh": "从胰腺外科角度帮你梳理可切除性判断要看哪些资料、血管受累为什么关键、术前需要准备什么、术后可能出现哪些情况。产出是「该问外科医生什么」，不是手术建议。",
+    "en": "Organises what a pancreatic surgeon looks at: resectability, vascular involvement, preoperative preparation and postoperative concerns. Produces questions to ask, not a surgical recommendation."
+  },
+  "welcome_message": {
+    "zh": "我是胰腺外科视角助手。把你的影像报告、病理和既往治疗告诉我，我帮你理清「能不能切、要看哪些指标、术前该准备什么」，并列出你下次见外科医生时该问的问题。我不会替你判断该不该手术，那必须由外科医生看片、看人之后决定。",
+    "en": "I organise the surgical perspective: resectability criteria, vascular involvement, and preoperative preparation. I will not decide whether surgery is right for you."
+  },
+  "icon_name": "scissors",
+  "color": "#0F766E",
+  "prompt_files": [
+    "SOUL.md",
+    "AGENTS.md",
+    "BOOTSTRAP.md"
+  ],
+  "quick_prompts": [
+    {
+      "title": { "zh": "梳理可切除性", "en": "Resectability review" },
+      "description": { "zh": "按影像与血管关系整理分期判断依据", "en": "Organise the resectability criteria from imaging" },
+      "prompt": { "zh": "我把增强 CT/MRI 报告发给你，请帮我梳理：报告里有没有提到肿瘤与肠系膜上动脉、肠系膜上静脉、门静脉、腹腔干、肝总动脉的关系？按胰腺外科判断可切除性时看哪些维度，帮我整理成下次问外科医生的问题清单。", "en": "Here is my CT/MRI report. Organise the vascular relationships and the criteria a surgeon uses for resectability, as questions for my next appointment." },
+      "color": "#ccfbf1",
+      "icon_name": "scan"
+    },
+    {
+      "title": { "zh": "术前要准备什么", "en": "Preoperative preparation" },
+      "description": { "zh": "术前评估、减黄、营养与体能准备", "en": "Assessment, biliary drainage, nutrition and fitness" },
+      "prompt": { "zh": "如果医生考虑手术，术前通常要做哪些评估和准备？我需要提前准备哪些资料和检查？请按「必须做」和「视情况做」分开列。", "en": "What assessment and preparation does surgery usually require, and what should I prepare in advance?" },
+      "color": "#e0f2fe",
+      "icon_name": "clipboard-list"
+    },
+    {
+      "title": { "zh": "术后可能出现什么", "en": "Postoperative concerns" },
+      "description": { "zh": "常见术后情况与需要就医的信号", "en": "Common postoperative issues and warning signs" },
+      "prompt": { "zh": "胰腺手术后一般会遇到哪些情况？哪些属于正常恢复过程，哪些是需要马上联系医生的信号？请说明判断依据。", "en": "What is normal after pancreatic surgery, and which signs need immediate medical contact?" },
+      "color": "#fef3c7",
+      "icon_name": "activity"
+    },
+    {
+      "title": { "zh": "不能手术时还有什么方向", "en": "When surgery is not an option" },
+      "description": { "zh": "整理外科以外的可能讨论方向", "en": "Organise non-surgical directions to discuss" },
+      "prompt": { "zh": "如果外科评估认为暂时不能手术，一般会从哪些方向继续讨论？请说明每种方向的适用前提，并列出我该问肿瘤内科医生的问题。", "en": "If surgery is not an option right now, which directions are typically discussed and under what preconditions?" },
+      "color": "#ede9fe",
+      "icon_name": "git-branch"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "每个工作日「09:00」提醒我核对检查报告是否齐全（影像、病理、化验、基因），缺哪份就列哪份",
+      "每周一「10:00」整理我需要向外科医生确认的问题清单，聚焦可切除性与术前准备",
+      "每次上传新影像报告后，帮我按血管关系逐项对照，列出仍缺失的信息"
+    ],
+    "en": [
+      "Every weekday at 09:00, check which reports are still missing (imaging, pathology, labs, genomics)",
+      "Every Monday at 10:00, refresh the list of questions for my surgeon about resectability",
+      "After each new imaging report, map the vascular relationships and list what is still missing"
+    ]
+  }
+}

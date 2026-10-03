@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   ANTD_BRAND_TOKENS,
+  DEFAULT_PALETTE,
   VALID_PALETTES,
   brandPrimary,
 } from "./themePalettes";
@@ -25,7 +26,7 @@ function contrastRatio(foreground: string, background: string): number {
 describe("theme palettes", () => {
   it("exposes the curated palette set", () => {
     expect(VALID_PALETTES).toEqual([
-      "rose",
+      "mint",
       "tech",
       "indigo",
       "teal",
@@ -36,15 +37,17 @@ describe("theme palettes", () => {
     ]);
   });
 
-  it("keeps the historic Elegant Rose default brand tokens", () => {
-    expect(ANTD_BRAND_TOKENS.rose.light.colorPrimary).toBe("#E85D75");
-    expect(ANTD_BRAND_TOKENS.rose.light.colorPrimaryHover).toBe("#D14A62");
-    expect(ANTD_BRAND_TOKENS.rose.light.colorPrimaryActive).toBe("#B83A50");
-    expect(ANTD_BRAND_TOKENS.rose.dark.colorPrimary).toBe("#F08B9A");
-    expect(ANTD_BRAND_TOKENS.rose.dark.colorLink).toBe("#F08B9A");
+  it("uses the xiaoyibao mint brand sampled from the product logo", () => {
+    expect(DEFAULT_PALETTE).toBe("mint");
+    expect(ANTD_BRAND_TOKENS.mint.light.colorPrimary).toBe("#2F8F80");
+    expect(ANTD_BRAND_TOKENS.mint.light.colorPrimaryHover).toBe("#26796C");
+    expect(ANTD_BRAND_TOKENS.mint.light.colorPrimaryActive).toBe("#1F6459");
+    // Dark mode lightens the brand so it stays legible on dark surfaces.
+    expect(ANTD_BRAND_TOKENS.mint.dark.colorPrimary).toBe("#5FC7B4");
+    expect(ANTD_BRAND_TOKENS.mint.dark.colorLink).toBe("#5FC7B4");
   });
 
-  it.each(VALID_PALETTES.filter((palette) => palette !== "rose"))(
+  it.each(VALID_PALETTES.filter((palette) => palette !== "mint"))(
     "keeps %s solid Ant Design states readable with white text",
     (palette) => {
       for (const mode of ["light", "dark"] as const) {

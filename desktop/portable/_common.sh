@@ -32,7 +32,7 @@ octop_version() {
 }
 
 portable_zip_basename() {
-  echo "Octop-portable-${1}-$(octop_version).zip"
+  echo "xyb-octop-portable-${1}-$(octop_version).zip"
 }
 
 desktop_pkg_basename() {
@@ -40,9 +40,9 @@ desktop_pkg_basename() {
   local ver
   ver="$(octop_version)"
   case "$plat" in
-    darwin-*) echo "Octop-desktop-${plat}-${ver}.dmg" ;;
-    windows-*) echo "Octop-desktop-${plat}-${ver}.exe" ;;
-    linux-*) echo "Octop-desktop-${plat}-${ver}.tar.gz" ;;
+    darwin-*) echo "xyb-octop-desktop-${plat}-${ver}.dmg" ;;
+    windows-*) echo "xyb-octop-desktop-${plat}-${ver}.exe" ;;
+    linux-*) echo "xyb-octop-desktop-${plat}-${ver}.tar.gz" ;;
     *)
       echo "unknown platform: ${plat}" >&2
       return 1

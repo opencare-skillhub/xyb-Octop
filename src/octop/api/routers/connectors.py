@@ -614,6 +614,25 @@ async def patch_custom_mcp_server(
         ) from exc
     except ValueError as exc:
         raise OctopError(ErrorCode.CONNECTOR_INVALID_CREDENTIALS, str(exc)) from exc
+    # ``enabled`` flips silently break every MCP tool of the user, so the change
+    # must leave a trace: the PUT/DELETE siblings are audited, and without this
+    # line a disabled-by-accident server is indistinguishable from one that was
+    # never seeded.
+    changed = " ".join(
+        f"{field}={value}"
+        for field, value in (
+            ("enabled", body.enabled),
+            ("default_open", body.default_open),
+            ("shared", body.shared),
+        )
+        if value is not None
+    )
+    server.services.audit_repo.write(
+        actor=user.username,
+        action="connector.custom_mcp.update",
+        target=server_name,
+        payload=changed or CUSTOM_MCP_KIND,
+    )
     _schedule_connector_reload(server, user.id, all_users=body.shared is not None)
     return {"servers": redact_servers_for_api(servers)}
 

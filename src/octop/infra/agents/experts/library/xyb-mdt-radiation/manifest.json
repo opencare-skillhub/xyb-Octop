@@ -1,0 +1,60 @@
+{
+  "id": "xyb-mdt-radiation",
+  "label": {
+    "zh": "放疗科视角",
+    "en": "Radiation Oncology Perspective"
+  },
+  "description": {
+    "zh": "从放疗科角度帮你梳理：放疗在胰腺癌里通常用在什么情形、不同技术路线有什么区别、为什么要关注周围器官、和化疗的先后顺序怎么安排。产出是「该问放疗科医生什么」。",
+    "en": "Organises the radiotherapy view: when it is used in pancreatic cancer, how techniques differ, organ-at-risk concerns, and sequencing with chemotherapy."
+  },
+  "welcome_message": {
+    "zh": "我是放疗科视角助手。放疗在胰腺癌里的角色比很多人想的更细分，我帮你理清「什么情况下会讨论放疗、不同技术的差别在哪、需要提前知道什么」，并列出该问放疗科医生的问题。我不会判断你该不该做放疗。",
+    "en": "I clarify when radiotherapy is discussed, how techniques differ, and what to ask. I do not decide whether you should have it."
+  },
+  "icon_name": "radiation",
+  "color": "#0891B2",
+  "prompt_files": ["SOUL.md", "AGENTS.md", "BOOTSTRAP.md"],
+  "quick_prompts": [
+    {
+      "title": { "zh": "放疗在什么情形下讨论", "en": "When radiotherapy is discussed" },
+      "description": { "zh": "不同病情阶段的放疗角色", "en": "Its role at different stages" },
+      "prompt": { "zh": "请说明放疗在胰腺癌的不同情形下（可切除术前术后、局部晚期、无法手术、复发、止痛）分别扮演什么角色，以及各自的讨论前提。", "en": "Explain radiotherapy's role across settings: perioperative, locally advanced, unresectable, recurrence, and palliation." },
+      "color": "#cffafe",
+      "icon_name": "layers"
+    },
+    {
+      "title": { "zh": "放疗技术有什么区别", "en": "How techniques differ" },
+      "description": { "zh": "常见技术路线的差别", "en": "Differences between techniques" },
+      "prompt": { "zh": "胰腺癌放疗常见的几种技术路线有什么差别？各自的优缺点是什么？我需要问医生哪些问题来判断适合哪种？", "en": "How do the common radiotherapy techniques differ, and what should I ask to judge which fits?" },
+      "color": "#e0f2fe",
+      "icon_name": "settings"
+    },
+    {
+      "title": { "zh": "和化疗谁先谁后", "en": "Sequencing with chemotherapy" },
+      "description": { "zh": "顺序安排通常考虑什么", "en": "What drives sequencing" },
+      "prompt": { "zh": "放疗和化疗的顺序通常是怎么决定的？同步和序贯各考虑什么？我该问医生什么？", "en": "How is radiotherapy sequenced with chemotherapy, and what should I ask?" },
+      "color": "#fef3c7",
+      "icon_name": "git-compare"
+    },
+    {
+      "title": { "zh": "放疗期间要注意什么", "en": "During radiotherapy" },
+      "description": { "zh": "疗程中的常见反应与就医阈值", "en": "Common effects and when to seek care" },
+      "prompt": { "zh": "放疗期间通常会出现哪些反应？哪些属于可观察的，哪些需要马上联系医生？请给出判断依据。", "en": "What effects are common during radiotherapy, and which need immediate contact?" },
+      "color": "#ede9fe",
+      "icon_name": "activity"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "放疗开始后，每三天「20:00」提醒我记录出现的反应与饮食情况",
+      "每次复诊前「09:00」帮我整理放疗相关待确认问题",
+      "把放疗与全身治疗的时间安排整理成时间线"
+    ],
+    "en": [
+      "During radiotherapy, every three days at 20:00, prompt me to log side effects and intake",
+      "Before each visit at 09:00, refresh my radiotherapy questions",
+      "Build a timeline of radiotherapy and systemic treatment"
+    ]
+  }
+}

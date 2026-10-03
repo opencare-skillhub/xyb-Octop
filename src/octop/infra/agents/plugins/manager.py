@@ -10,6 +10,7 @@ import tempfile
 import urllib.error
 import urllib.request
 import zipfile
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -130,6 +131,39 @@ def _assert_zip_magic(archive: Path) -> None:
 def _read_plugin_yaml(plugin_dir: Path) -> dict[str, Any]:
     raw = yaml.safe_load((plugin_dir / "plugin.yaml").read_text(encoding="utf-8"))
     return raw if isinstance(raw, dict) else {}
+
+
+@lru_cache(maxsize=256)
+def _bundled_default_enabled(plugin_id: str) -> bool:
+    """Whether a bundled plugin should be on when ``config.json`` says nothing.
+
+    Upstream defaults every plugin to enabled, which is right for a general
+    assistant and wrong for a patient-facing one: a fresh install should not
+    surface games, fortune-telling and developer utilities to someone managing a
+    cancer diagnosis. A plugin opts out by declaring ``default_enabled: false``
+    in its ``plugin.yaml`` (an unknown key the harness ignores, so this stays
+    additive and upstream-safe).
+    """
+    from octop.infra.agents.plugins.bundled import (  # noqa: PLC0415
+        default_bundled_plugins_root,
+    )
+
+    plugin_dir = default_bundled_plugins_root() / plugin_id
+    if not (plugin_dir / "plugin.yaml").is_file():
+        return True
+    try:
+        data = _read_plugin_yaml(plugin_dir)
+    except Exception:
+        return True
+    value = data.get("default_enabled")
+    return True if value is None else bool(value)
+
+
+def _plugin_is_enabled(enabled_map: dict[str, bool], plugin_id: str) -> bool:
+    """Resolve one plugin's on/off state, falling back to its declared default."""
+    if plugin_id in enabled_map:
+        return enabled_map[plugin_id]
+    return _bundled_default_enabled(plugin_id)
 
 
 def parse_plugin_ui_meta(plugin_dir: Path) -> dict[str, str] | None:
@@ -402,7 +436,7 @@ class PluginManager:
             except Exception as exc:
                 logger.error("skip plugin dir %s: %s", plugin_dir, exc)
                 continue
-            if enabled.get(manifest.id, True) is False:
+            if not _plugin_is_enabled(enabled, manifest.id):
                 continue
             try:
                 loaded.append(_load_plugin_dir(plugin_dir, install_deps=install_deps))
@@ -416,7 +450,7 @@ class PluginManager:
         for plugin_id, is_on in enabled.items():
             if not is_on:
                 unload_plugin(plugin_id)
-        return [p for p in loaded if enabled.get(p.manifest.id, True) is not False]
+        return [p for p in loaded if _plugin_is_enabled(enabled, p.manifest.id)]
 
     def load_missing(self, *, install_deps: bool = False) -> list[LoadedPlugin]:
         """Load any on-disk plugins that are not yet in the process registry.
@@ -433,7 +467,7 @@ class PluginManager:
             except Exception as exc:
                 logger.error("skip plugin dir %s: %s", plugin_dir, exc)
                 continue
-            if enabled.get(manifest.id) is False:
+            if not _plugin_is_enabled(enabled, manifest.id):
                 continue
             if PluginRegistry().get(manifest.id) is not None:
                 continue
@@ -465,7 +499,7 @@ class PluginManager:
                         "id": plugin_dir.name,
                         "error": str(exc),
                         "path": str(plugin_dir),
-                        "enabled": enabled_map.get(plugin_dir.name, True),
+                        "enabled": _plugin_is_enabled(enabled_map, plugin_dir.name),
                     },
                 )
                 continue
@@ -501,7 +535,7 @@ class PluginManager:
                     "requires": parse_plugin_requires(plugin_dir),
                     "path": str(plugin_dir),
                     "loaded": loaded is not None,
-                    "enabled": enabled_map.get(manifest.id, True),
+                    "enabled": _plugin_is_enabled(enabled_map, manifest.id),
                     "ui": ui_meta,
                     "tools": tools_meta,
                 },
@@ -748,7 +782,7 @@ class PluginManager:
         enabled = self.global_enabled_map()
         pairs: list[tuple[str, bytes]] = []
         for plugin in PluginRegistry().list_plugins():
-            if enabled.get(plugin.manifest.id) is False:
+            if not _plugin_is_enabled(enabled, plugin.manifest.id):
                 continue
             if not agent_plugin_enabled(agent_plugins, plugin.manifest.id):
                 continue

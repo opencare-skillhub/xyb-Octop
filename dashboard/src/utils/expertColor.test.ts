@@ -10,13 +10,13 @@ import {
 
 describe("resolveExpertPalette", () => {
   it("matches exact curated swatches", () => {
-    expect(resolveExpertPalette("#E85D75")).toBe("rose");
+    expect(resolveExpertPalette("#2F8F80")).toBe("mint");
     expect(resolveExpertPalette("#6366F1")).toBe("indigo");
   });
 
-  it("falls back to rose when color is missing", () => {
-    expect(resolveExpertPalette(null)).toBe("rose");
-    expect(resolveExpertPalette(undefined)).toBe("rose");
+  it("falls back to mint when color is missing", () => {
+    expect(resolveExpertPalette(null)).toBe("mint");
+    expect(resolveExpertPalette(undefined)).toBe("mint");
   });
 
   it("snaps nearby template pastels onto the nearest swatch", () => {
@@ -30,8 +30,8 @@ describe("resolveExpertPalette", () => {
 
 describe("parseStoredColor", () => {
   it("restores the curated key when the hex matches a swatch exactly", () => {
-    expect(parseStoredColor("#E85D75")).toBe("rose");
-    expect(parseStoredColor("#e85d75")).toBe("rose");
+    expect(parseStoredColor("#2F8F80")).toBe("mint");
+    expect(parseStoredColor("#2f8f80")).toBe("mint");
     expect(parseStoredColor(PALETTE_SWATCH.slate)).toBe("slate");
   });
 
@@ -59,7 +59,7 @@ describe("resolveSubagentAccent", () => {
 
   it("maps curated palette keys onto swatch hex", () => {
     expect(resolveSubagentAccent("tech")).toBe(expertPaletteColor("tech"));
-    expect(resolveSubagentAccent("Rose")).toBe(expertPaletteColor("rose"));
+    expect(resolveSubagentAccent("Mint")).toBe(expertPaletteColor("mint"));
   });
 
   it("keeps CSS named colors for catalog frontmatter", () => {

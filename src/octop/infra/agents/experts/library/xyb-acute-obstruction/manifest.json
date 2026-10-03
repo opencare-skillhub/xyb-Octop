@@ -1,0 +1,60 @@
+{
+  "id": "xyb-acute-obstruction",
+  "label": {
+    "zh": "肠梗阻视角",
+    "en": "Bowel Obstruction Perspective"
+  },
+  "description": {
+    "zh": "帮你识别肠梗阻的典型表现（腹胀、腹痛、呕吐、停止排气排便），判断紧急程度，理清减压、支架、手术这几条处理方向各自的讨论前提，以及该问医生什么。",
+    "en": "Recognises the classic signs of bowel obstruction, judges urgency, and lays out the decompression, stent, and surgical options as things to discuss — not to decide."
+  },
+  "welcome_message": {
+    "zh": "我是肠梗阻视角助手。如果现在腹胀明显、反复呕吐、完全不能排气排便，请立刻就医。症状缓解后，我可以帮你理清：梗阻是怎么判断的、减压和支架和手术分别在什么情况下讨论、出院后要注意什么。",
+    "en": "If you have marked bloating, repeated vomiting, and cannot pass stool or gas, seek care now. Once stable, I can explain how obstruction is assessed and which options get discussed."
+  },
+  "icon_name": "circle-slash",
+  "color": "#EA580C",
+  "prompt_files": ["SOUL.md", "AGENTS.md", "BOOTSTRAP.md"],
+  "quick_prompts": [
+    {
+      "title": { "zh": "这些表现是不是梗阻", "en": "Are these signs obstruction" },
+      "description": { "zh": "典型表现与紧急程度", "en": "Classic signs and urgency" },
+      "prompt": { "zh": "我现在的表现是：【腹胀 / 腹痛 / 呕吐 / 排便情况】。这是不是肠梗阻的表现？需不需要马上就医？", "en": "My symptoms are: [...]. Could this be obstruction, and do I need care now?" },
+      "color": "#ffedd5",
+      "icon_name": "alert-triangle"
+    },
+    {
+      "title": { "zh": "梗阻一般怎么处理", "en": "How obstruction is managed" },
+      "description": { "zh": "减压、支架、手术的讨论前提", "en": "Decompression, stent, surgery" },
+      "prompt": { "zh": "肠梗阻通常会怎么处理？减压、放支架、手术分别在什么情况下会被讨论？各自有什么前提？", "en": "How is obstruction usually managed, and when are decompression, stenting, or surgery discussed?" },
+      "color": "#e0f2fe",
+      "icon_name": "list-checks"
+    },
+    {
+      "title": { "zh": "为什么不能吃东西", "en": "Why no food or drink" },
+      "description": { "zh": "禁食与减压的原因", "en": "Why fasting and decompression" },
+      "prompt": { "zh": "医生让我禁食、插胃管减压，为什么要这样做？一般要多久？这期间我能做什么？", "en": "Why am I told not to eat and to have a decompression tube, for how long, and what can I do meanwhile?" },
+      "color": "#ccfbf1",
+      "icon_name": "info"
+    },
+    {
+      "title": { "zh": "怎么减少再发", "en": "Lowering recurrence" },
+      "description": { "zh": "饮食与随访的注意点", "en": "Diet and follow-up" },
+      "prompt": { "zh": "梗阻缓解后，饮食和日常生活要注意什么？有没有需要长期随访的项目？", "en": "After it settles, what should I watch in diet and daily life, and what long-term follow-up matters?" },
+      "color": "#fef3c7",
+      "icon_name": "utensils"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "每天「20:00」问一次排便与排气情况，异常就提示就医",
+      "出院后两周内，每天记录进食量与腹胀程度",
+      "复诊前「09:00」整理梗阻相关的待问问题"
+    ],
+    "en": [
+      "Daily at 20:00, ask about bowel movements and gas; flag anything abnormal",
+      "For two weeks after discharge, log intake and bloating daily",
+      "Before visits at 09:00, collect obstruction-related questions"
+    ]
+  }
+}

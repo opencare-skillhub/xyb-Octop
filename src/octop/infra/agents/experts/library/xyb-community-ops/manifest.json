@@ -1,0 +1,60 @@
+{
+  "id": "xyb-community-ops",
+  "label": {
+    "zh": "病友社区运营",
+    "en": "Patient Community Operations"
+  },
+  "description": {
+    "zh": "为病友群志愿者和社区运营提供支持：把权威来源整理成群内能用的科普、按规范产出公众号内容、做术语统一与去 AI 味、整理情报日报。所有输出仍需遵守医学红线，不凭记忆答、不越界给建议。",
+    "en": "Supports community volunteers and operators: build group-ready explainers from authoritative sources, produce compliant articles, normalise terminology, and assemble intelligence briefs — all under the medical red lines."
+  },
+  "welcome_message": {
+    "zh": "我是病友社区运营助手。群里的问题我会先分清类型：能按权威来源整理的，我给出带出处的科普；涉及个人病情的，我帮你把话术转成「请咨询主管医生」而不越界。我也可以帮你把资料变成公众号文章、统一术语、去掉 AI 味。所有医学内容都必须有来源，不能凭记忆答。",
+    "en": "I separate group questions into those I can answer from sources and those that must be redirected to a doctor. I can also turn material into articles and normalise terminology."
+  },
+  "icon_name": "users-round",
+  "color": "#9333EA",
+  "prompt_files": ["SOUL.md", "AGENTS.md", "BOOTSTRAP.md"],
+  "quick_prompts": [
+    {
+      "title": { "zh": "把资料整理成群内科普", "en": "Group-ready explainer" },
+      "description": { "zh": "从权威来源产出可直接发的科普", "en": "Source-backed explainer for the group" },
+      "prompt": { "zh": "请把这份资料整理成群内可以直接转发的科普：控制在【字数】，每条结论带来源与年份，术语首次出现时用一句话解释，最后加免责声明。", "en": "Turn this material into a group-ready explainer: [...] characters, sourced and dated, terms explained, disclaimer at the end." },
+      "color": "#f3e8ff",
+      "icon_name": "message-square"
+    },
+    {
+      "title": { "zh": "群里有人问个人病情", "en": "A member asks about themselves" },
+      "description": { "zh": "不越界的回应话术", "en": "A safe way to respond" },
+      "prompt": { "zh": "群里有人问「我这种情况该怎么办」，请给我一段既有人情味、又不越界的回应话术，并把可讨论的方向整理成该问医生的问题。", "en": "Someone asked what they should do about their own case. Give me a warm but safe reply, plus questions they can ask their doctor." },
+      "color": "#e0f2fe",
+      "icon_name": "shield"
+    },
+    {
+      "title": { "zh": "写成公众号文章", "en": "Turn it into an article" },
+      "description": { "zh": "按规范产出内容", "en": "Produce compliant content" },
+      "prompt": { "zh": "请把这份资料写成公众号文章：标题不夸大、不制造焦虑，结论带来源，区分「已证实」与「早期数据」，结尾加免责声明。", "en": "Write this as an article: no hype, sourced conclusions, early data flagged, disclaimer at the end." },
+      "color": "#fef3c7",
+      "icon_name": "newspaper"
+    },
+    {
+      "title": { "zh": "去掉 AI 味", "en": "Remove the AI flavour" },
+      "description": { "zh": "让文字更像人在说话", "en": "Make it sound human" },
+      "prompt": { "zh": "这段文字读起来太像 AI 写的，请在不改变事实的前提下改写得更自然：去掉排比堆砌、模板化转折和过度解释。", "en": "This reads like AI. Rewrite it naturally without changing any facts." },
+      "color": "#ede9fe",
+      "icon_name": "wand"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "每周一「09:00」汇总上周群内高频问题，标注哪些有权威来源、哪些不能回答",
+      "每月 1 日「10:00」整理上月临床与指南更新摘要，每条带来源与日期",
+      "每周五「17:00」检查本周产出的文章是否符合医学红线与措辞要求"
+    ],
+    "en": [
+      "Every Monday at 09:00, summarise last week's high-frequency questions and flag which have sources",
+      "On the 1st of each month at 10:00, assemble last month's guideline and trial updates with sources",
+      "Every Friday at 17:00, check this week's outputs against the medical red lines"
+    ]
+  }
+}

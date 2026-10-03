@@ -1,0 +1,93 @@
+---
+name: pdf-translate
+description: 当患者或家属拿到**英文 PDF 资料**（期刊论文、国外指南、说明书、试验方案）需要中文对照时使用。在本机把 PDF 译成中英对照版本，便于与医生讨论。**只做翻译，不做摘要判断**；机器翻译有误差，关键结论仍以原文为准。Use to translate English PDFs into bilingual Chinese for discussion.
+metadata:
+  octop:
+    emoji: "🌐"
+    label:
+      zh: "PDF 中英对照翻译"
+      en: "PDF Bilingual Translation"
+    summary:
+      zh: "把英文 PDF 译成中英对照本机版本；只翻译不判读。"
+      en: "Translate an English PDF into a bilingual local copy."
+source_repo: opencare-skillhub/pdf-translate
+source_license: NONE
+adapted: 2026-10-02
+readiness: 需安装依赖（首次运行 setup.sh 会用 uv 安装 pdf2zh_next，约 1GB 级模型资产）；未安装时只给安装步骤
+---
+> ## 使用范围（优先级高于本文其余内容）
+>
+> - **只做翻译，不做判读。** 产出是中英对照文本；资料说了什么、对病情意味着什么，由对应 MDT 视角按 `SOUL.md` 骨架分析，且不替代医生。
+> - **机器翻译会出错**，尤其是剂量、分期、统计口径与否定句。关键结论必须回原文核对，输出里要写明这一条。
+> - 依赖 `pdf2zh_next`（含约 1GB 级模型资产），由 `scripts/setup.sh` 用 `uv` 在**本机**安装。**未安装时只给安装步骤，不要假装已开始翻译。**
+> - 资料只在本机处理；涉及患者身份信息时先过 `xyb-record-desensitize`。
+> - 上传受版权保护的全文时，提醒用户自行确认使用范围。
+
+
+# PDF Translate (English → Chinese)
+
+This skill translates PDF documents using **PDFMathTranslate-next** (`pdf2zh_next`), the BabelDOC-based translator that preserves formulas, charts, table of contents, and page layout. It produces two files per input:
+
+- `*-mono.pdf` — monolingual translated PDF (Chinese only)
+- `*-dual.pdf` — bilingual PDF (original + translation, side by side or alternating)
+
+## Why this skill exists
+
+Translating an academic PDF well requires preserving math, figures, and layout — something plain LLM translation can't do. `pdf2zh_next` handles that, but it has a non-trivial install (Python 3.12, model assets) and many engine options. This skill automates the environment setup and picks a translation engine that reuses credentials the user already has, so translation "just works" without manual configuration.
+
+## Workflow
+
+Run the setup script first (installs `pdf2zh_next` if missing, verifies it), then the translate script (detects the best engine and runs the translation). Both scripts are idempotent.
+
+**Subsequent runs are fast.** Once `pdf2zh_next` is installed and the model assets are downloaded (after the first successful translation), setup.sh becomes a silent sub-second no-op — it detects the install and the `~/.cache/babeldoc/models` cache and returns immediately without spawning a Python import or re-downloading anything. Re-running it on every invocation is cheap and safe; you do not need to track whether setup has happened before.
+
+### Step 1 — Ensure the environment is ready
+
+```bash
+bash ~/.claude/skills/pdf-translate/scripts/setup.sh
+```
+
+This installs `pdf2zh_next` via `uv tool install --python 3.12 pdf2zh-next` (the project requires Python ≥3.10,<3.14; 3.12 is the documented recommendation) and confirms it is on PATH. It is fast and safe to re-run. The first real translation downloads layout/translation model assets (DocLayout-YOLO + fonts, ~hundreds of MB) into `~/.cache/babeldoc/` — tell the user the first run is slow because of this one-time download. The setup and translate scripts detect this cache and skip the "slow first run" messaging once the models are present.
+
+### Step 2 — Translate
+
+```bash
+bash ~/.claude/skills/pdf-translate/scripts/translate.sh "<input.pdf>" [options]
+```
+
+The script auto-detects a translation engine:
+
+1. **ClaudeCode (default when `claude` CLI is available)** — detects if the user is running from Claude Code by checking for the `claude` CLI on PATH. Uses the exact model Claude Code is configured to use (resolved via `ANTHROPIC_DEFAULT_SONNET_MODEL`, etc.). This is the default when working in Claude Code, so the translation uses the same model ecosystem the user is already in. Note: it spawns one `claude -p` subprocess per text segment, so it is slower than the OpenAI engine.
+2. **OpenAI-compatible (fallback when API key exists)** — used when `claude` CLI is not found but `OPENAI_API_KEY` is set. Reuses the model configured for Codex: reads `base_url` + `model` from `~/.codex/config.toml` and the API key from `OPENAI_API_KEY`. Fast (HTTP, high concurrency), ideal for full papers.
+3. **SiliconFlowFree (zero-config fallback)** — used when neither `claude` CLI nor API key is detectable. The project's free GLM-4-9B service; needs no key. Note: file content is forwarded through the project maintainer's server.
+
+Override detection with flags: `--engine openai|siliconflowfree|claudecode`, `--model <name>`, `--base-url <url>`, `--api-key <key>`.
+
+Common options:
+- `--output <dir>` — output directory (default: an `output/` folder next to the input PDF)
+- `--pages "1-5,8"` — translate only some pages
+- `--lang-in en --lang-out zh-CN` — language codes (defaults: en → zh-CN)
+- `--qps N --pool-max-workers N` — concurrency tuning (see `references/advanced.md`)
+- `--no-dual` / `--no-mono` — suppress one of the two outputs
+- Pass any other `pdf2zh_next` flag through with `-- <flag> <value>`
+
+### Step 3 — Report results
+
+After the script finishes, it prints the paths of the generated `*-mono.pdf` and `*-dual.pdf`. Tell the user where these files are (relative to the input), open/preview them if asked, and note the engine + model that was used. If the user wants different quality or speed, suggest overrides (see `references/advanced.md`).
+
+## Default behavior choices (and how to change them)
+
+- **Source/target language**: English → Simplified Chinese (`en` → `zh-CN`). Override with `--lang-in` / `--lang-out`. Full language code list is in `references/advanced.md`.
+- **Engine**: ClaudeCode when `claude` CLI is on PATH (default in Claude Code), else OpenAI-compatible when a key is found, else SiliconFlowFree. Use `--engine openai` to force the OpenAI engine even from Claude Code. The claudecode engine reuses Claude Code's configured model; the OpenAI engine reuses the model named in `~/.codex/config.toml`.
+- **Model**: for the openai engine, the model from `~/.codex/config.toml`; for claudecode, `sonnet` (resolved by Claude Code to the user's configured model). Reasoning models (e.g. `gpt-5.5`, `glm-5.2`) work but are slower and use more tokens; for large papers consider a lighter chat model via `--model`.
+- **Concurrency**: modest defaults (`--qps 10 --pool-max-workers 30` for the OpenAI engine; `--qps 4 --pool-max-workers 8` for claudecode since each segment is a subprocess). Increase for faster translation if the gateway allows it.
+
+## When something goes wrong
+
+- **`command not found: pdf2zh_next`** after install — the uv tool bin dir isn't on PATH. The scripts add `~/.local/bin` to PATH themselves, but if the user runs `pdf2zh_next` directly in their own shell, they need `export PATH="$HOME/.local/bin:$PATH"` (Linux/macOS).
+- **First translation hangs on "loading assets" / downloading** — normal one-time model download. Wait it out.
+- **429 / rate-limit errors** — lower `--qps` and `--pool-max-workers`.
+- **Gateway returns errors for the OpenAI engine** — the detected base_url may only expose the responses API, not chat-completions. Run with `--engine siliconflowfree` to bypass, or point `--base-url` at a chat-completions endpoint.
+- **Out-of-memory / very large PDFs** — use `--pages` to translate in chunks, or `--max-pages-per-part 50`.
+
+For the full option reference, engine configuration details, translating to other languages, glossaries, and offline/air-gapped usage, read `references/advanced.md`.

@@ -1,0 +1,60 @@
+{
+  "id": "xyb-genomics",
+  "label": {
+    "zh": "基因检测解读",
+    "en": "Genomic Report Interpretation"
+  },
+  "description": {
+    "zh": "帮你读懂基因检测报告：每个字段在说什么、胚系与体系变异的区别、哪些变异有临床意义、哪些是意义未明、报告里没检出的部分也要讲清。产出是可讨论的方向与要问医生的问题，不是用药建议。",
+    "en": "Reads a genomic report field by field: germline versus somatic, which variants are actionable, which are variants of uncertain significance, and what the negative results mean."
+  },
+  "welcome_message": {
+    "zh": "我是基因检测解读助手。把报告发给我，我帮你逐项解释：检出了什么、是胚系还是体系、哪些有明确的临床意义、哪些属于意义未明暂时不能指导治疗、以及报告里没检出的部分意味着什么。我不会因为检出某个变异就建议你用某个药——那要肿瘤内科医生结合全部情况判断。",
+    "en": "I explain each finding, its evidence level, and what was not detected. I never turn a variant into a drug recommendation."
+  },
+  "icon_name": "dna",
+  "color": "#4F46E5",
+  "prompt_files": ["SOUL.md", "AGENTS.md", "BOOTSTRAP.md"],
+  "quick_prompts": [
+    {
+      "title": { "zh": "解读我的基因报告", "en": "Interpret my report" },
+      "description": { "zh": "逐项解释检出结果", "en": "Explain each finding" },
+      "prompt": { "zh": "这是我的基因检测报告。请逐项帮我解释检出结果：基因名、变异类型、是胚系还是体系、报告给出的临床意义分级是什么。", "en": "Here is my report. Explain each finding: gene, variant type, germline or somatic, and the reported clinical significance." },
+      "color": "#e0e7ff",
+      "icon_name": "file-text"
+    },
+    {
+      "title": { "zh": "胚系和体系有什么区别", "en": "Germline vs somatic" },
+      "description": { "zh": "两类变异的含义与影响", "en": "What the two classes mean" },
+      "prompt": { "zh": "请解释胚系变异和体系变异有什么区别，对我的治疗和家人的风险分别意味着什么。", "en": "Explain how germline and somatic variants differ, for my treatment and for my family." },
+      "color": "#ccfbf1",
+      "icon_name": "git-compare"
+    },
+    {
+      "title": { "zh": "意义未明是什么意思", "en": "What VUS means" },
+      "description": { "zh": "VUS 为什么不指导治疗", "en": "Why a VUS does not guide treatment" },
+      "prompt": { "zh": "报告里有几个「意义未明变异」，这是什么意思？为什么它不能用来指导治疗？以后有可能变成有意义的吗？", "en": "My report lists variants of uncertain significance. What does that mean, and can it change later?" },
+      "color": "#fef3c7",
+      "icon_name": "help-circle"
+    },
+    {
+      "title": { "zh": "没检出突变是坏消息吗", "en": "Are negative results bad news" },
+      "description": { "zh": "阴性结果的正确理解", "en": "How to read a negative result" },
+      "prompt": { "zh": "我的报告里大部分基因都是阴性或者未检出，这是不是说明没有治疗方向了？请解释阴性结果该怎么理解。", "en": "Most genes were negative. Does that mean there are no options? Explain how to read a negative result." },
+      "color": "#ede9fe",
+      "icon_name": "check-circle"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "拿到基因报告后，帮我整理成「基因 / 变异 / 胚系或体系 / 意义分级 / 可讨论方向」表格",
+      "复诊前「09:00」整理基因相关的待问问题与需要补充的检测",
+      "如果报告里有胚系变异，提醒我家人可能需要遗传咨询"
+    ],
+    "en": [
+      "Turn the report into gene / variant / origin / significance / direction table",
+      "Before visits at 09:00, list genomic questions and any tests still outstanding",
+      "If a germline finding appears, remind me that relatives may need genetic counselling"
+    ]
+  }
+}

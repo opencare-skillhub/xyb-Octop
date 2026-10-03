@@ -1,0 +1,60 @@
+{
+  "id": "xyb-acute-gi-bleeding",
+  "label": {
+    "zh": "消化道出血视角",
+    "en": "GI Bleeding Perspective"
+  },
+  "description": {
+    "zh": "从普外科与消化内镜角度帮你判断消化道出血的紧急程度：出血量怎么估算、哪些表现必须立刻急诊、就医前该做什么、到了医院通常会做哪些检查和处理。第一优先级永远是就医，不是分析。",
+    "en": "Judges how urgent gastrointestinal bleeding is, what must go to the emergency department immediately, and what assessment and management usually follow. Going to care always comes first."
+  },
+  "welcome_message": {
+    "zh": "我是消化道出血视角助手。先说最重要的一条：如果现在正在呕血、便血或黑便，请立刻就医或拨打 120，不要在这里等我分析。等你稳定了，或者症状已经缓解，我再帮你理清出血分级、就医阈值和该问医生什么。",
+    "en": "If you are vomiting blood, passing blood, or passing black stools right now, go to the emergency department or call 120 immediately. Come back to me once you are stable."
+  },
+  "icon_name": "droplet",
+  "color": "#DC2626",
+  "prompt_files": ["SOUL.md", "AGENTS.md", "BOOTSTRAP.md"],
+  "quick_prompts": [
+    {
+      "title": { "zh": "现在是否需要立刻就医", "en": "Do I need emergency care now" },
+      "description": { "zh": "按表现判断紧急程度", "en": "Judge urgency from the signs" },
+      "prompt": { "zh": "我现在的情况是：【描述症状】。请直接告诉我这是不是需要立刻就医，以及判断依据是什么。", "en": "Here is what is happening: [...]. Tell me directly whether this needs emergency care and why." },
+      "color": "#fee2e2",
+      "icon_name": "alert-triangle"
+    },
+    {
+      "title": { "zh": "黑便和便血的区别", "en": "Black stools vs blood" },
+      "description": { "zh": "不同表现提示什么", "en": "What different signs suggest" },
+      "prompt": { "zh": "黑便和便血分别提示什么？哪些药物或食物会让大便变黑、容易误判？", "en": "What do black stools and visible blood each suggest, and what medicines or foods can mimic them?" },
+      "color": "#e0f2fe",
+      "icon_name": "info"
+    },
+    {
+      "title": { "zh": "到医院会做什么", "en": "What happens in hospital" },
+      "description": { "zh": "评估与处理流程", "en": "Assessment and management" },
+      "prompt": { "zh": "如果因为消化道出血去医院，通常会做哪些检查和处理？我需要提前准备什么信息？", "en": "If I go in for GI bleeding, what tests and treatment usually follow, and what should I prepare?" },
+      "color": "#fef3c7",
+      "icon_name": "hospital"
+    },
+    {
+      "title": { "zh": "出院后要注意什么", "en": "After discharge" },
+      "description": { "zh": "复发信号与随访", "en": "Recurrence signs and follow-up" },
+      "prompt": { "zh": "出血处理稳定出院后，我需要观察什么？出现什么情况要马上再去医院？", "en": "After discharge, what should I watch for and when must I return immediately?" },
+      "color": "#ede9fe",
+      "icon_name": "activity"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "每个月「09:00」提醒我复查血常规，关注血红蛋白变化",
+      "如果我在对话里提到黑便、呕血或头晕乏力加重，立刻优先提示就医",
+      "出院后一周内「20:00」每天问一次有无复发信号"
+    ],
+    "en": [
+      "Monthly at 09:00, remind me to check my blood count and track haemoglobin",
+      "If I mention black stools, blood, or worsening dizziness, surface the emergency instruction first",
+      "For a week after discharge at 20:00, check daily for recurrence signs"
+    ]
+  }
+}

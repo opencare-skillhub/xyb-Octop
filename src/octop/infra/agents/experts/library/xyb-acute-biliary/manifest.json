@@ -1,0 +1,60 @@
+{
+  "id": "xyb-acute-biliary",
+  "label": {
+    "zh": "胆道梗阻与引流视角",
+    "en": "Biliary Obstruction & Drainage Perspective"
+  },
+  "description": {
+    "zh": "帮你理解胆道梗阻（黄疸、胆管炎、皮肤瘙痒）的处理逻辑：ERCP 和 PTCD 分别在什么情况下选用、减黄的时机怎么定、引流术后怎么护理、堵了怎么办。判断依据讲清楚，方案选择交给医生。",
+    "en": "Explains the logic of biliary obstruction management: when ERCP versus PTCD is chosen, timing of drainage, post-procedure care, and what to do when a drain blocks."
+  },
+  "welcome_message": {
+    "zh": "我是胆道梗阻与引流视角助手。黄疸、胆管炎、引流管护理这些问题很具体，我帮你理清：ERCP 和 PTCD 各自适用于什么情况、引流前后的注意事项、出现什么信号要马上就医。如果现在发热伴寒战、黄疸迅速加重，请先就医。",
+    "en": "I clarify how ERCP and PTCD differ, what to watch around drainage, and which signs need immediate care. If you have fever with chills and rapidly worsening jaundice, seek care first."
+  },
+  "icon_name": "git-branch",
+  "color": "#CA8A04",
+  "prompt_files": ["SOUL.md", "AGENTS.md", "BOOTSTRAP.md"],
+  "quick_prompts": [
+    {
+      "title": { "zh": "ERCP 和 PTCD 怎么选", "en": "ERCP versus PTCD" },
+      "description": { "zh": "两种引流方式的适用情形", "en": "When each approach is used" },
+      "prompt": { "zh": "医生提到可能需要引流，请帮我解释 ERCP 和 PTCD 分别在什么情况下会选用、各自的过程和注意事项，以及我该问医生什么。", "en": "Drainage has been mentioned. Explain when ERCP or PTCD is chosen, how each works, and what to ask." },
+      "color": "#fef9c3",
+      "icon_name": "git-compare"
+    },
+    {
+      "title": { "zh": "什么时候要减黄", "en": "When to relieve jaundice" },
+      "description": { "zh": "减黄时机的判断维度", "en": "What drives the timing" },
+      "prompt": { "zh": "黄疸到什么程度需要考虑先减黄？减黄和不减黄分别有什么考虑？需要看哪些指标？", "en": "At what point is relieving jaundice considered, and which markers matter?" },
+      "color": "#e0f2fe",
+      "icon_name": "trending-down"
+    },
+    {
+      "title": { "zh": "引流管怎么护理", "en": "Caring for the drain" },
+      "description": { "zh": "居家护理与异常信号", "en": "Home care and warning signs" },
+      "prompt": { "zh": "我带着引流管回家，日常怎么护理？哪些情况是正常的、哪些要马上回医院？", "en": "I am going home with a drain. How do I care for it, and which signs need immediate return?" },
+      "color": "#ccfbf1",
+      "icon_name": "home"
+    },
+    {
+      "title": { "zh": "引流堵了或发热", "en": "Blocked drain or fever" },
+      "description": { "zh": "紧急情况的处理优先级", "en": "Urgency and first steps" },
+      "prompt": { "zh": "如果引流管不出液体了，或者我出现发热、腹痛加重，应该怎么办？", "en": "What should I do if the drain stops draining, or if I develop fever and worsening pain?" },
+      "color": "#fee2e2",
+      "icon_name": "alert-triangle"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "带管期间每天「20:00」提醒我记录引流量、颜色与体温",
+      "每周一「09:00」提醒我复查胆红素与肝功能",
+      "出现发热或引流量骤变时，立刻提示就医"
+    ],
+    "en": [
+      "While the drain is in, daily at 20:00, prompt me to log output, colour and temperature",
+      "Every Monday at 09:00, remind me to check bilirubin and liver function",
+      "If fever or a sudden change in output occurs, surface the emergency instruction first"
+    ]
+  }
+}

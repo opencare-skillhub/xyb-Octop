@@ -81,7 +81,7 @@ export function tryReloadOnStaleChunk(error: unknown): boolean {
   }
 
   reloadScheduled = true;
-  console.warn("[Octop] Stale chunk detected; reloading once.", error);
+  console.warn("[小胰宝] Stale chunk detected; reloading once.", error);
   void bustServiceWorkerAndReload();
   return true;
 }

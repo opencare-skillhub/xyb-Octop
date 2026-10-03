@@ -1,0 +1,64 @@
+{
+  "id": "xyb-mdt-pathology",
+  "label": {
+    "zh": "病理科视角",
+    "en": "Pathology Perspective"
+  },
+  "description": {
+    "zh": "从病理科角度帮你读懂病理报告：取材方式为什么决定结论的确定性、免疫组化在查什么、哪些结论需要分子检测补充、报告里哪些字段影响后续方向。产出是「该问病理科或主管医生什么」。",
+    "en": "Explains what a pathology report says: how sampling limits the conclusion, what immunohistochemistry tests, and which fields steer later decisions."
+  },
+  "welcome_message": {
+    "zh": "我是病理科视角助手。把你的病理报告发给我，我帮你解释取材方式、病理类型、免疫组化指标分别在说什么，以及为什么有些结论需要进一步检测才能确认。我不出病理诊断，那必须由病理科医生看切片作出。",
+    "en": "I explain the sampling method, tumour type, and IHC markers, and why some conclusions need further testing. I do not make a pathological diagnosis."
+  },
+  "icon_name": "microscope",
+  "color": "#B45309",
+  "prompt_files": [
+    "SOUL.md",
+    "AGENTS.md",
+    "BOOTSTRAP.md"
+  ],
+  "quick_prompts": [
+    {
+      "title": { "zh": "读懂病理报告", "en": "Read my pathology report" },
+      "description": { "zh": "逐项解释病理字段", "en": "Explain each pathology field" },
+      "prompt": { "zh": "这是我的病理报告。请帮我逐项解释：病理类型、分化程度、取材方式各是什么意思，以及哪些指标还需要做进一步检测。", "en": "Explain my tumour type, grade, sampling method, and which markers need further testing." },
+      "color": "#fef3c7",
+      "icon_name": "file-text"
+    },
+    {
+      "title": { "zh": "免疫组化在查什么", "en": "What IHC tests" },
+      "description": { "zh": "常见免疫组化指标含义", "en": "Common IHC markers and their meaning" },
+      "prompt": { "zh": "报告里有免疫组化结果，请帮我解释这些指标各自在查什么、结果阳性或阴性分别意味着什么。", "en": "Explain what each IHC marker tests and what positive or negative means." },
+      "color": "#e0f2fe",
+      "icon_name": "flask-conical"
+    },
+    {
+      "title": { "zh": "穿刺和手术标本有什么区别", "en": "Biopsy vs surgical specimen" },
+      "description": { "zh": "取材方式对结论的影响", "en": "How sampling affects the conclusion" },
+      "prompt": { "zh": "我的病理是用穿刺取的，这和手术后的标本病理有什么区别？会不会影响结论的准确性？", "en": "How does a needle biopsy differ from a surgical specimen, and does it affect accuracy?" },
+      "color": "#ccfbf1",
+      "icon_name": "git-compare"
+    },
+    {
+      "title": { "zh": "还需要做什么检测", "en": "What testing remains" },
+      "description": { "zh": "整理待补的检测项目", "en": "List outstanding tests" },
+      "prompt": { "zh": "基于我目前的病理报告，通常还会建议补充哪些检测？每项检测是为了回答什么问题？", "en": "Which additional tests are usually suggested from my report, and what does each answer?" },
+      "color": "#ede9fe",
+      "icon_name": "plus-circle"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "每次拿到病理或免疫组化报告后，帮我逐项解释并标出待补检测",
+      "复诊前「09:00」提醒我确认病理切片是否需要会诊或补充检测",
+      "把病理结论与影像结论放在一起对照，标出相互不一致的地方"
+    ],
+    "en": [
+      "After each pathology or IHC report, explain the fields and list outstanding tests",
+      "Before visits at 09:00, remind me whether the slides need review or extra testing",
+      "Compare pathology and imaging conclusions and flag any disagreement"
+    ]
+  }
+}

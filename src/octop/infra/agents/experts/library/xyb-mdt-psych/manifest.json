@@ -1,0 +1,60 @@
+{
+  "id": "xyb-mdt-psych",
+  "label": {
+    "zh": "心理支持视角",
+    "en": "Psychological Support Perspective"
+  },
+  "description": {
+    "zh": "从心理支持角度陪患者和家属面对诊断、治疗与不确定性：情绪怎么分级、危机信号要优先处理、家属一侧怎么支持、什么时候该找专业心理或精神科。产出是陪伴与求助路径，不是心理诊断。",
+    "en": "Supports patients and families through diagnosis, treatment and uncertainty: grading distress, prioritising crisis signals, supporting caregivers, and knowing when to seek professional help."
+  },
+  "welcome_message": {
+    "zh": "我是心理支持视角助手。确诊和治疗过程中的害怕、愤怒、无力感都很常见，你可以直接跟我说。我会陪你理清情绪、告诉你在什么情况下需要找专业帮助。如果你出现伤害自己的念头，请立刻联系我，我会第一时间给你可以打的电话。",
+    "en": "Fear, anger and helplessness are common here. I will stay with you through them and tell you when professional help matters. If you are thinking of harming yourself, tell me immediately — I will give you a number to call first."
+  },
+  "icon_name": "heart-handshake",
+  "color": "#E11D48",
+  "prompt_files": ["SOUL.md", "AGENTS.md", "BOOTSTRAP.md"],
+  "quick_prompts": [
+    {
+      "title": { "zh": "我现在很害怕", "en": "I am scared" },
+      "description": { "zh": "先陪伴，再一起理清", "en": "Stay with the feeling first" },
+      "prompt": { "zh": "我最近一直很害怕，晚上睡不着，总想最坏的结果。我想说说，但不想听大道理。", "en": "I am scared all the time and cannot sleep. I want to talk, but not to hear platitudes." },
+      "color": "#ffe4e6",
+      "icon_name": "heart"
+    },
+    {
+      "title": { "zh": "怎么跟家人说", "en": "Telling my family" },
+      "description": { "zh": "沟通的时机与方式", "en": "Timing and approach" },
+      "prompt": { "zh": "我不知道怎么把这个诊断告诉家人，尤其是孩子和父母。能不能帮我理一下怎么说、什么时候说？", "en": "I do not know how to tell my family, especially my children and parents. Help me think about what and when to say." },
+      "color": "#e0f2fe",
+      "icon_name": "users"
+    },
+    {
+      "title": { "zh": "家属也很累", "en": "The caregiver is exhausted" },
+      "description": { "zh": "照护者自己的支持", "en": "Support for the carer" },
+      "prompt": { "zh": "我一直在照顾家人，自己快撑不住了，但又觉得不该抱怨。我该怎么办？", "en": "I am caring for my family member and running out of strength, but I feel I should not complain." },
+      "color": "#fef3c7",
+      "icon_name": "battery-low"
+    },
+    {
+      "title": { "zh": "什么时候该找专业帮助", "en": "When to get professional help" },
+      "description": { "zh": "求助时机与途径", "en": "When and where to seek help" },
+      "prompt": { "zh": "怎么判断我的情绪问题需要找心理医生或精神科？有哪些信号？可以找哪些途径？", "en": "How do I know when to see a psychologist or psychiatrist, and where can I go?" },
+      "color": "#ede9fe",
+      "icon_name": "compass"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "每天「21:30」用一句话问问今天过得怎么样，不需要展开",
+      "每周日「20:00」回顾这一周的情绪起伏，找出最难受的时刻与当时的情境",
+      "治疗节点（入院、复查、出结果）前一天「19:00」提前陪着做准备"
+    ],
+    "en": [
+      "Every day at 21:30, ask in one line how today went — no need to elaborate",
+      "Every Sunday at 20:00, review the week's emotional swings and what triggered the hardest moments",
+      "The evening before each treatment milestone at 19:00, check in and prepare together"
+    ]
+  }
+}

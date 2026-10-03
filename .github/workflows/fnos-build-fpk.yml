@@ -8,7 +8,7 @@ name: Build Octop FPK
 #
 # 制品复用：
 #   - Docker 镜像：不再重建，等待 docker-publish 推送的
-#     ghcr.io/tencentcloud/octop:{version|latest}
+#     ghcr.io/opencare-skillhub/xyb-octop:{version|latest}
 #   - Native wheel：优先从同版本 GitHub Release（v*）下载；
 #     缺失时再回退到本仓源码构建
 #   - 产物挂到同一个 v* GitHub Release（与 wheel / 桌面包并列），不再单独打 fnos-* tag
@@ -110,14 +110,14 @@ jobs:
 
       - name: Build Docker FPK
         env:
-          FPK_NAME_PREFIX: Octop-fnos
+          FPK_NAME_PREFIX: xyb-octop-fnos
         run: bash scripts/build-fpk.sh docker
 
       - name: Upload docker fpk artifact
         uses: actions/upload-artifact@v4
         with:
           name: docker-fpk
-          path: dist/Octop-fnos-docker-*.fpk
+          path: dist/xyb-octop-fnos-docker-*.fpk
           if-no-files-found: error
 
   native:
@@ -214,18 +214,18 @@ jobs:
       - name: Build native FPK
         id: build_native
         env:
-          FPK_NAME_PREFIX: Octop-fnos
+          FPK_NAME_PREFIX: xyb-octop-fnos
         run: bash scripts/build-fpk.sh native
 
       - name: Show native fpk size
-        run: ls -lh dist/Octop-fnos-native-*.fpk
+        run: ls -lh dist/xyb-octop-fnos-native-*.fpk
 
       - name: Upload native fpk artifact
         id: upload_native
         uses: actions/upload-artifact@v4
         with:
           name: native-fpk
-          path: dist/Octop-fnos-native-*.fpk
+          path: dist/xyb-octop-fnos-native-*.fpk
           if-no-files-found: error
 
       - name: Upload native install log (for debugging)

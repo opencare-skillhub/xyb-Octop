@@ -17,6 +17,19 @@ from octop.infra.agents.builtin_skills import sync_octop_builtin_skills
 
 _PACKAGE = "octop.infra.agents.builtin_skills"
 
+#: Every built-in skill packaged by this distribution. The xiaoyibao fork adds
+#: four medical guardrail skills on top of upstream's ``skill-manager``; they are
+#: seeded into **every** non-team expert workspace, which is exactly why they
+#: must stay few and generic.
+EXPECTED_BUILTIN_SKILLS = [
+    "skill-manager",
+    "xyb-anti-hallucination",
+    "xyb-evidence-guard",
+    "xyb-medical-disclaimer",
+    "xyb-record-desensitize",
+    "xyb-term-glossary",
+]
+
 
 def _manager_script() -> Path:
     script = (
@@ -48,7 +61,7 @@ async def test_sync_seeds_manager_and_retires_old_installer(tmp_path: Path) -> N
 
     synced = await sync_octop_builtin_skills(agent.workspace)
 
-    assert synced == ["skill-manager"]
+    assert synced == EXPECTED_BUILTIN_SKILLS
     assert await agent.workspace.aexists("skills")
     assert await agent.workspace.aread_text("_builtin_skills/install-skill/SKILL.md") is None
     manager = await agent.workspace.aread_text("_builtin_skills/skill-manager/SKILL.md")
@@ -82,7 +95,7 @@ async def test_sync_uses_system_files_path(tmp_path: Path) -> None:
 
     synced = await sync_octop_builtin_skills(agent.workspace)
 
-    assert synced == ["skill-manager"]
+    assert synced == EXPECTED_BUILTIN_SKILLS
     manager = await agent.workspace.aread_text("_builtin_skills/skill-manager/SKILL.md")
     assert manager is not None
     assert "{{OCTOP_SKILLS}}" not in manager
@@ -108,6 +121,45 @@ def test_manager_script_compiles() -> None:
     script = _manager_script()
     assert script.is_file()
     compile(script.read_text(encoding="utf-8"), "manage_skills.py", "exec")
+
+
+@pytest.mark.asyncio
+async def test_xyb_guardrail_skills_are_seeded_with_frontmatter(tmp_path: Path) -> None:
+    """The four medical guardrails load and declare themselves correctly.
+
+    These skills are the safety floor for every medical expert, so a broken
+    frontmatter block (the harness requires a literal leading ``---\\n``) would
+    silently remove the guardrails from all of them.
+    """
+    agent = FakeHarnessAgent(workspace_dir=tmp_path, virtual_mode=False)
+
+    await sync_octop_builtin_skills(agent.workspace)
+
+    for slug in EXPECTED_BUILTIN_SKILLS:
+        if not slug.startswith("xyb-"):
+            continue
+        text = await agent.workspace.aread_text(f"_builtin_skills/{slug}/SKILL.md")
+        assert text is not None, f"{slug} was not seeded"
+        assert text.startswith("---\n"), f"{slug} frontmatter must start at byte 0"
+        assert f"name: {slug}" in text
+        assert "metadata:" in text and "octop:" in text
+        assert "label:" in text and "summary:" in text
+        assert "{{OCTOP_" not in text, f"{slug} has an unrendered placeholder"
+
+
+def test_guardrail_skills_have_no_unresolved_template_tokens() -> None:
+    """Source copies must not ship render tokens the sync step cannot replace."""
+    package_root = resources.files(_PACKAGE)
+    for slug in EXPECTED_BUILTIN_SKILLS:
+        if not slug.startswith("xyb-"):
+            continue
+        raw = package_root.joinpath(slug).joinpath("SKILL.md").read_text(encoding="utf-8")
+        # These tokens are rendered by _collect_files/sync; anything else is a bug.
+        allowed = {"{{OCTOP_WORKSPACE}}", "{{OCTOP_SKILLS}}", "{{OCTOP_BUILTIN_SKILLS}}"}
+        import re
+
+        found = set(re.findall(r"\{\{[A-Z_]+\}\}", raw))
+        assert found <= allowed, f"{slug} uses unknown tokens: {sorted(found - allowed)}"
 
 
 def test_manager_installs_lists_removes_and_restores_zip(tmp_path: Path) -> None:

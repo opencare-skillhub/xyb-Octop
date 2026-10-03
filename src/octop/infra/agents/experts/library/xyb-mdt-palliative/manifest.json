@@ -1,0 +1,60 @@
+{
+  "id": "xyb-mdt-palliative",
+  "label": {
+    "zh": "安宁疗护视角",
+    "en": "Palliative Care Perspective"
+  },
+  "description": {
+    "zh": "从安宁疗护角度帮你理解：姑息治疗到底做什么、疼痛和症状怎么控制、什么时候引入、怎么和家人沟通意愿。先说清一件事——姑息治疗不等于临终关怀，也不等于放弃抗肿瘤治疗。",
+    "en": "Explains what palliative care actually does, how symptoms are controlled, when to involve it, and how to discuss wishes. It is not hospice and not giving up on treatment."
+  },
+  "welcome_message": {
+    "zh": "我是安宁疗护视角助手。先说清一件事：姑息治疗不等于临终关怀，也不等于放弃抗肿瘤治疗——它的目标是减轻痛苦、改善生活质量，可以和抗肿瘤治疗同时进行。我帮你理清疼痛控制、症状管理、意愿沟通这些具体问题，以及该问医生什么。",
+    "en": "Palliative care is not hospice and not stopping cancer treatment. It relieves suffering alongside treatment. I help with symptom control and conversations about what matters to you."
+  },
+  "icon_name": "flower-2",
+  "color": "#65A30D",
+  "prompt_files": ["SOUL.md", "AGENTS.md", "BOOTSTRAP.md"],
+  "quick_prompts": [
+    {
+      "title": { "zh": "姑息治疗到底是什么", "en": "What palliative care is" },
+      "description": { "zh": "澄清定位与常见误解", "en": "Clarify what it is and is not" },
+      "prompt": { "zh": "医生说建议看姑息治疗门诊，我一下子很慌。请帮我解释姑息治疗到底做什么、和临终关怀有什么区别、什么时候会引入。", "en": "My doctor suggested palliative care and it frightened me. Explain what it does and how it differs from hospice." },
+      "color": "#ecfccb",
+      "icon_name": "info"
+    },
+    {
+      "title": { "zh": "疼痛控制不好", "en": "Pain is not controlled" },
+      "description": { "zh": "疼痛评估与止痛的常见顾虑", "en": "Pain assessment and common worries about analgesia" },
+      "prompt": { "zh": "我一直在疼，但不敢多用止痛药，怕上瘾、怕以后没药可用。请帮我理清疼痛评估和止痛的常见顾虑，以及该问医生什么。", "en": "I am in pain but afraid of addiction and of running out of options. Help me separate the real concerns from the myths." },
+      "color": "#e0f2fe",
+      "icon_name": "activity"
+    },
+    {
+      "title": { "zh": "怎么和家人谈意愿", "en": "Talking about wishes" },
+      "description": { "zh": "意愿沟通的准备", "en": "Preparing for the conversation" },
+      "prompt": { "zh": "我想和家人谈谈如果病情变化我希望怎么被照顾，但不知道怎么开口。请帮我列一下可以谈的内容和开场方式。", "en": "I want to talk with my family about how I would like to be cared for, but do not know how to start." },
+      "color": "#fef3c7",
+      "icon_name": "message-circle"
+    },
+    {
+      "title": { "zh": "有哪些症状要处理", "en": "Which symptoms to address" },
+      "description": { "zh": "常见症状的分项梳理", "en": "Work through common symptoms" },
+      "prompt": { "zh": "除了疼痛，还有哪些症状是安宁疗护会重点处理的？我该怎么向医生描述我的症状？", "en": "Besides pain, which symptoms does palliative care focus on, and how should I describe mine?" },
+      "color": "#ede9fe",
+      "icon_name": "list-checks"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "每天「20:00」提醒我记录疼痛程度与缓解情况，便于就诊时描述",
+      "每周三「10:00」帮我回顾这一周的症状变化与用药情况",
+      "复诊前「09:00」整理我这次想和医生谈的意愿相关问题"
+    ],
+    "en": [
+      "Every day at 20:00, prompt me to log pain levels and relief for the next visit",
+      "Every Wednesday at 10:00, review this week's symptom changes and medication",
+      "Before visits at 09:00, collect the wishes-related questions I want to raise"
+    ]
+  }
+}

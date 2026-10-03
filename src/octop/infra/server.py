@@ -550,7 +550,7 @@ class OctopServer:
             banner = (
                 "\n\033[33m"
                 "╔══════════════════════════════════════════════════════════╗\n"
-                "║  Octop first-run wizard password (one-time use):          ║\n"
+                "║  小胰宝 first-run wizard password (one-time use):        ║\n"
                 f"║  {new_pw:<54}  ║\n"
                 "║  Open the dashboard and paste it into the setup wizard.  ║\n"
                 "║  File: ~/octop-login.txt                                   ║\n"

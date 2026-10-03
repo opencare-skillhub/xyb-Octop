@@ -1,7 +1,7 @@
 /** Brand palettes — orthogonal to light/dark mode (`data-theme`). */
 
 export type ThemePalette =
-  | "rose"
+  | "mint"
   | "tech"
   | "indigo"
   | "teal"
@@ -12,7 +12,7 @@ export type ThemePalette =
   | "custom";
 
 export const VALID_PALETTES: ThemePalette[] = [
-  "rose",
+  "mint",
   "tech",
   "indigo",
   "teal",
@@ -25,7 +25,7 @@ export const VALID_PALETTES: ThemePalette[] = [
 /** Curated palettes only — "custom" is handled separately via a hex value. */
 export const CURATED_PALETTES: ThemePalette[] = [...VALID_PALETTES];
 
-export const DEFAULT_PALETTE: ThemePalette = "rose";
+export const DEFAULT_PALETTE: ThemePalette = "mint";
 export const DEFAULT_CUSTOM_COLOR = "#4B74FA";
 
 /** True when the value is one of the curated palette keys (not "custom"/hex). */
@@ -44,7 +44,7 @@ export const PALETTE_STORAGE_KEY = LEGACY_PALETTE_STORAGE_KEY;
 
 /** Swatch color shown in the palette picker (light brand). */
 export const PALETTE_SWATCH: Record<ThemePalette, string> = {
-  rose: "#E85D75",
+  mint: "#2F8F80",
   tech: "#4B74FA",
   indigo: "#6366F1",
   teal: "#0D9488",
@@ -74,25 +74,25 @@ export const ANTD_BRAND_TOKENS: Record<
   Exclude<ThemePalette, "custom">,
   { light: AntdBrandTokens; dark: AntdBrandTokens }
 > = {
-  rose: {
+  mint: {
     light: {
-      colorPrimary: "#E85D75",
-      colorPrimaryHover: "#D14A62",
-      colorPrimaryActive: "#B83A50",
-      colorLink: "#E85D75",
+      colorPrimary: "#2F8F80",
+      colorPrimaryHover: "#26796C",
+      colorPrimaryActive: "#1F6459",
+      colorLink: "#2F8F80",
     },
     dark: {
-      colorPrimary: "#F08B9A",
-      colorPrimaryBg: "rgba(232, 93, 117, 0.12)",
-      colorPrimaryBgHover: "rgba(232, 93, 117, 0.16)",
-      colorPrimaryBorder: "rgba(232, 93, 117, 0.25)",
-      colorPrimaryBorderHover: "rgba(232, 93, 117, 0.35)",
-      colorPrimaryHover: "#F5A8B4",
-      colorPrimaryActive: "#E85D75",
-      colorPrimaryText: "#F08B9A",
-      colorPrimaryTextHover: "#F5A8B4",
-      colorPrimaryTextActive: "#E85D75",
-      colorLink: "#F08B9A",
+      colorPrimary: "#5FC7B4",
+      colorPrimaryBg: "rgba(95, 199, 180, 0.14)",
+      colorPrimaryBgHover: "rgba(95, 199, 180, 0.2)",
+      colorPrimaryBorder: "rgba(95, 199, 180, 0.3)",
+      colorPrimaryBorderHover: "rgba(95, 199, 180, 0.4)",
+      colorPrimaryHover: "#8ADACA",
+      colorPrimaryActive: "#2F8F80",
+      colorPrimaryText: "#5FC7B4",
+      colorPrimaryTextHover: "#8ADACA",
+      colorPrimaryTextActive: "#5FC7B4",
+      colorLink: "#5FC7B4",
     },
   },
   tech: {

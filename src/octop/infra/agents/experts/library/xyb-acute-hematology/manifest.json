@@ -1,0 +1,60 @@
+{
+  "id": "xyb-acute-hematology",
+  "label": {
+    "zh": "血液科视角",
+    "en": "Haematology Perspective"
+  },
+  "description": {
+    "zh": "帮你理解血常规里的关键问题：贫血、血小板减少、中性粒细胞减少、血栓风险，治疗相关骨髓抑制怎么看，什么程度需要就医，以及该问医生什么。",
+    "en": "Explains the blood-count problems that matter here: anaemia, thrombocytopenia, neutropenia, and thrombosis risk, including treatment-related marrow suppression."
+  },
+  "welcome_message": {
+    "zh": "我是血液科视角助手。血常规里的箭头容易让人紧张，也容易被忽视。我帮你分清：哪些变化需要马上处理、哪些可以观察、下一步该复查什么。如果出现不明原因的皮下出血点、牙龈出血不止、或单侧腿肿痛，请先就医。",
+    "en": "I help you sort blood-count changes into those needing action now, those to watch, and what to recheck. Unexplained bruising, bleeding that will not stop, or one-sided leg swelling needs care first."
+  },
+  "icon_name": "droplets",
+  "color": "#BE185D",
+  "prompt_files": ["SOUL.md", "AGENTS.md", "BOOTSTRAP.md"],
+  "quick_prompts": [
+    {
+      "title": { "zh": "帮我看血常规", "en": "Read my blood count" },
+      "description": { "zh": "逐项解释关键指标", "en": "Explain the key indices" },
+      "prompt": { "zh": "这是我的血常规结果。请帮我解释血红蛋白、白细胞、中性粒细胞、血小板这几项分别意味着什么，哪些需要关注。", "en": "Here is my blood count. Explain haemoglobin, white cells, neutrophils and platelets, and which need attention." },
+      "color": "#fce7f3",
+      "icon_name": "file-text"
+    },
+    {
+      "title": { "zh": "化疗后骨髓抑制", "en": "Marrow suppression" },
+      "description": { "zh": "治疗相关血象下降的规律", "en": "How counts fall after treatment" },
+      "prompt": { "zh": "化疗后血象下降一般是什么规律？什么时间点最低？我需要多久复查一次？", "en": "How do counts behave after chemotherapy, when is the nadir, and how often should I recheck?" },
+      "color": "#e0f2fe",
+      "icon_name": "trending-down"
+    },
+    {
+      "title": { "zh": "血栓风险要注意什么", "en": "Thrombosis risk" },
+      "description": { "zh": "血栓的预防与警示信号", "en": "Prevention and warning signs" },
+      "prompt": { "zh": "胰腺癌患者为什么血栓风险高？有哪些警示信号？平时要注意什么、该问医生什么？", "en": "Why is thrombosis risk higher here, what are the warning signs, and what should I ask?" },
+      "color": "#fef3c7",
+      "icon_name": "alert-circle"
+    },
+    {
+      "title": { "zh": "贫血怎么配合治疗", "en": "Managing anaemia" },
+      "description": { "zh": "贫血的评估与处理维度", "en": "Assessment and options" },
+      "prompt": { "zh": "我的血红蛋白偏低，请帮我梳理贫血的评估维度、可能需要查什么、以及该问医生什么。", "en": "My haemoglobin is low. Explain how anaemia is assessed and what to ask." },
+      "color": "#ede9fe",
+      "icon_name": "scale"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "每次复查血常规后，帮我把关键指标做成对比表并标出趋势",
+      "化疗后第 7、14、21 天「09:00」提醒我复查血常规",
+      "出现出血点、牙龈出血不止或单侧腿肿痛时，立刻提示就医"
+    ],
+    "en": [
+      "After each blood count, build a comparison table and flag the trend",
+      "On days 7, 14 and 21 after chemotherapy at 09:00, remind me to recheck",
+      "If bruising, unstoppable bleeding, or one-sided leg swelling appears, surface the emergency instruction"
+    ]
+  }
+}

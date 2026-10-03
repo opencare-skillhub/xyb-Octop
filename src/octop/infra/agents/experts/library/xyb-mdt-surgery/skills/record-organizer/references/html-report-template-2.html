@@ -1,0 +1,526 @@
+{# 模板：卡片式 HTML 报告
+   风格 100% 对齐 pancreatic_cancer_case_template.html
+   - 卡片 = 全边框 + 浅底色 + 彩色标题（绿/红/紫/橙/浅绿）
+   - 基础信息和用药方案 = 无色卡片（默认蓝色边框 #7fa4c4，纯白背景）
+   - 时间轴 = 绿色圆点，警报事件红点，.note 附注
+   - 指标趋势 = 纯 SVG 折线图（Python 端生成）+ 绿底数据表格（分标志物单独表格）
+   - 基因/病理 = 3 列 grid + 黄色 tag 标签
+   - 免疫组化 = 4 列 grid + blue-note 分析
+   - 用药方案 = grid 概要 + table 详情
+   - 关注问题 = timeline + .alert
+   - 免责声明 = 黄底边框
+   所有变量由 compute_report_context() 提供。
+   注意：由于要保留时间轴加粗效果等安全 HTML，timeline.title 使用 safe 过滤器。其他动态字段均由 e() 或 safe 精确控制。
+   SVG（chart_svg 等）需直接输出，不能转义。 #}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>胰腺肿瘤患者病情概览 — {{ (demographics or {}).get('name','患者') | e }}</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      background: #f5f7fb;
+      color: #263238;
+    }
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+    }
+    .card {
+      border: 1.5px solid #7fa4c4;
+      border-radius: 9px;
+      padding: 14px 18px;
+      margin-bottom: 14px;
+      background: #fff;
+    }
+    .card.green { border-color: #7cbb78; background: #fbfffb; }
+    .card.red { border-color: #d58b8b; background: #fffafa; }
+    .card.purple { border-color: #8a78bc; background: #fcfbff; }
+    .card.orange { border-color: #d8aa55; background: #fffdf7; }
+    .card.lightgreen { border-color: #8fd29d; background: #f2fff4; }
+    h1 {
+      margin: 0 0 16px;
+      text-align: center;
+      font-size: 22px;
+      color: #1c3852;
+    }
+    h2 {
+      margin: 0 0 10px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid rgba(0,0,0,.18);
+      font-size: 17px;
+      color: #1d5f86;
+    }
+    .green h2 { color: #26943a; }
+    .red h2 { color: #b23030; }
+    .purple h2 { color: #5b45a1; }
+    .orange h2 { color: #b07812; }
+    .basic {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 15px;
+    }
+    .basic b { color: #111; }
+    .timeline { list-style: none; margin: 0; padding: 0; }
+    .timeline li {
+      position: relative;
+      padding-left: 26px;
+      margin: 8px 0;
+      line-height: 1.45;
+      font-size: 14px;
+    }
+    .timeline li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 4px;
+      width: 11px;
+      height: 11px;
+      border: 2px solid #4ba64e;
+      border-radius: 50%;
+      background: #fff;
+    }
+    .timeline li.alert::before { border-color: #b34343; }
+    .date { color: #13933c; font-weight: 700; margin-right: 8px; }
+    .alert .date, .bad { color: #c73535; }
+    .note { margin-left: 26px; color: #555; font-size: 13px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .box {
+      border: 1px solid #d7dce2;
+      border-radius: 6px;
+      padding: 10px 12px;
+      min-height: 56px;
+      background: linear-gradient(#fff, #fafafa);
+      font-size: 14px;
+    }
+    .label { color: #4a5560; font-weight: 700; display: block; margin-bottom: 4px; }
+    .value { font-weight: 700; color: #333; }
+    .value.redtxt { color: #c83333; }
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      margin-top: 3px;
+      border-radius: 999px;
+      background: #fff1b8;
+      color: #9b6b00;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .ihc {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .ihc .box { text-align: center; min-height: 52px; }
+    .blue-note {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 7px;
+      background: #edf4ff;
+      color: #183b69;
+      font-size: 14px;
+    }
+    .chart-wrap { text-align: center; }
+    .chart-title { font-weight: 800; font-size: 18px; margin: 2px 0 8px; }
+    .chart {
+      width: 520px;
+      max-width: 100%;
+      height: 260px;
+      margin: 0 auto 14px;
+      border-left: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      position: relative;
+      background-image: linear-gradient(#eef1f5 1px, transparent 1px), linear-gradient(90deg,#eef1f5 1px, transparent 1px);
+      background-size: 100% 25%, 12.5% 100%;
+    }
+    svg { overflow: visible; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      background: #f2fff4;
+    }
+    th, td {
+      border: 1px solid #c8ebcf;
+      padding: 8px 10px;
+      text-align: center;
+    }
+    th { background: #d9f8df; color: #179338; }
+    tr.latest td { background: #dcecff; font-weight: 700; color: #1c5ca8; }
+    .footer {
+      color: #8b8b8b;
+      font-size: 12px;
+      text-align: right;
+      margin-top: 6px;
+    }
+    .disclaimer {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #fff8e1;
+      border: 1px solid #ffe082;
+      font-size: 12px;
+      color: #795548;
+      text-align: center;
+    }
+    /* 危急值横幅（扩展，参考模板中无此模块，但 Skill 输出需要） */
+    .alert-banner {
+      background: linear-gradient(135deg, #c0392b, #e74c3c) !important;
+      border: none !important;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(192,57,43,0.4);
+    }
+    .alert-banner h2 { color: #fff !important; border-bottom-color: rgba(255,255,255,.3) !important; }
+    .alert-row { padding: 2px 0; font-size: 14px; }
+    /* 折叠详情（扩展，参考模板中无此模块，但 Skill 输出需要） */
+    .detail { margin: 8px 0 4px; }
+    .detail details { border-left: 3px solid #d7dce2; padding-left: 12px; }
+    .detail summary {
+      color: #2563eb;
+      cursor: pointer;
+      font-size: 13px;
+      padding: 4px 0;
+      user-select: none;
+    }
+    .detail summary:hover { text-decoration: underline; }
+    .detail-body { padding: 8px 0 4px; }
+    .empty { color: #9ca3af; font-style: italic; padding: 8px 0; }
+    @media (max-width: 720px) {
+      body { padding: 10px; }
+      .grid, .ihc { grid-template-columns: 1fr; }
+      .basic { gap: 8px; }
+    }
+    @media print {
+      details > div { display: block !important; }
+      body { background: #fff; padding: 0; }
+      .page { box-shadow: none; }
+      .card { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<main class="page">
+  <h1>胰腺肿瘤患者病情概览</h1>
+
+  {# ── 危急值警报（红色横幅）── #}
+  {% if has_critical and critical_alerts %}
+  <section class="card red alert-banner">
+    <h2>🆘 危急值警报 — 请立即就医</h2>
+    {% for a in critical_alerts %}
+      {% set lvl = a.get('level', 0) if a is mapping else getattr(a, 'level', 0) %}
+      {% if lvl >= 4 %}
+        {% set msg = a.get('message','') if a is mapping else getattr(a, 'message','') %}
+        {% set emoji = a.get('emoji','🔴') if a is mapping else getattr(a, 'emoji','🔴') %}
+        <div class="alert-row">{{ emoji }} {{ msg | e }}</div>
+      {% endif %}
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <!-- 患者基础信息 -->
+  <section class="card">
+    <h2>患者基础信息</h2>
+    <div class="basic">
+      <span><b>姓名：</b>{{ (demographics or {}).get('name','XXX') | e }}</span>
+      <span><b>性别：</b>{{ (demographics or {}).get('gender','') | e }}</span>
+      <span><b>年龄：</b>{{ (demographics or {}).get('age','XX') | e }}岁</span>
+      {% if (demographics or {}).get('height') %}
+      <span><b>身高：</b>{{ demographics.height | e }}cm</span>
+      {% endif %}
+      {% if (demographics or {}).get('weight') %}
+      <span><b>体重：</b>{{ demographics.weight | e }}kg</span>
+      {% endif %}
+      {% if (demographics or {}).get('past_history') %}
+      <span><b>既往史：</b>{{ demographics.past_history | e }}</span>
+      {% endif %}
+      {% if (demographics or {}).get('primary_diagnosis') %}
+      <span><b>主要诊断：</b>{{ demographics.primary_diagnosis | e }}</span>
+      {% endif %}
+      {% if (demographics or {}).get('icd_code') %}
+      <span><b>疾病编码：</b>{{ demographics.icd_code | e }}</span>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- 就诊经历时间轴 -->
+  <section class="card green">
+    <h2>就诊经历时间轴</h2>
+    {% if timeline %}
+    <ul class="timeline">
+      {% for item in timeline %}
+      {% set d = (item.dates or [''])[0] if item.dates else '' %}
+      {% set is_alert = item.category in ('key_concerns', 'critical') or '严重' in (item.title or '') %}
+      <li{% if is_alert %} class="alert"{% endif %}><span class="date">{{ (d or '日期待确认') | e }}</span>{{ (item.title or '') | safe }}</li>
+      {% if item.note %}
+      <div class="note">{{ item.note | safe }}</div>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div class="empty">暂无时间线数据</div>
+    {% endif %}
+  </section>
+
+  <!-- 手术病理结果 -->
+  <section class="card red">
+    <h2>手术病理结果</h2>
+    {% if pathology %}
+    <div class="grid">
+      {% for item in pathology %}
+      <div class="box">
+        <span class="label">{{ (item.label or item.type or item.date or '') | e }}</span>
+        <span class="value{% if item.is_critical %} redtxt{% endif %}">{{ (item.summary or item.findings or item.value or '') | e }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% if pathology_tag %}
+    <p class="tag">{{ pathology_tag | e }}</p>
+    {% endif %}
+    {% else %}
+    <div class="empty">暂无病理数据</div>
+    {% endif %}
+  </section>
+
+  <!-- 免疫组化 -->
+  <section class="card purple">
+    <h2>免疫组化结果</h2>
+    {% set ihc_items = [] %}
+    {% for gh in genetic_highlights %}
+      {% if gh is mapping and gh.get('category') == 'ihc' %}
+        {% set _ = ihc_items.append(gh) %}
+      {% endif %}
+    {% endfor %}
+    {% if ihc_items %}
+    <div class="ihc">
+      {% for item in ihc_items %}
+      <div class="box"><b>{{ (item.gene or item.marker or '') | e }}</b><br>{{ (item.result or item.mutation or '') | e }}</div>
+      {% endfor %}
+    </div>
+    {% if ihc_note %}
+    <div class="blue-note"><b>免疫表型分析：</b>{{ ihc_note | safe }}</div>
+    {% endif %}
+    {% else %}
+    <div class="empty">暂无免疫组化数据</div>
+    {% endif %}
+  </section>
+
+  <!-- 基因检测 -->
+  <section class="card orange">
+    <h2>基因检测结果</h2>
+    {% set gene_items = [] %}
+    {% for gh in genetic_highlights %}
+      {% if gh is mapping and gh.get('category') != 'ihc' %}
+        {% set _ = gene_items.append(gh) %}
+      {% endif %}
+    {% endfor %}
+    {% if gene_items %}
+    <div class="grid">
+      {% for gh in gene_items %}
+      <div class="box">
+        <span class="value{% if gh.get('pathogenic') or gh.get('is_critical') %} redtxt{% endif %}">{{ (gh.gene or '') | e }}</span><br>
+        {{ (gh.mutation or gh.position or gh.result or '') | safe }}
+        {% if gh.get('tags') %}
+          {% for t in gh.tags %}
+          <br><span class="tag">{{ t | e }}</span>
+          {% endfor %}
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty">暂无基因检测数据</div>
+    {% endif %}
+  </section>
+
+  <!-- 用药方案 -->
+  <section class="card">
+    <h2>用药方案</h2>
+    {% if medication_summary %}
+    <div class="grid">
+      {% for item in medication_summary %}
+      <div class="box">
+        <span class="label">{{ (item.label or '') | e }}</span>
+        <span class="value{% if item.is_critical %} redtxt{% endif %}">{{ (item.value or '') | e }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if medication_table %}
+    <h2 style="margin-top: 12px;">具体药物（最近处方 {{ (medication_prescription_date or '') | e }}）</h2>
+    <table>
+      <thead>
+        <tr><th>药物</th><th>剂量</th><th>给药方式</th><th>用途</th></tr>
+      </thead>
+      <tbody>
+        {% for row in medication_table %}
+        <tr>
+          <td>{{ (row.name or '') | e }}</td>
+          <td>{{ (row.dose or '') | e }}</td>
+          <td>{{ (row.route or '') | e }}</td>
+          <td>{{ (row.purpose or '') | e }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% elif medication and (medication.current or medication.history) %}
+      {% for m in medication.current %}<div>{{ m | e }}</div>{% endfor %}
+      {% if medication.history %}
+      <div class="detail"><details><summary>历史用药详情 ▾</summary><div class="detail-body">
+        {% for m in medication.history %}<div>{{ m | e }}</div>{% endfor %}
+      </div></details></div>
+      {% endif %}
+    {% else %}
+      <div class="empty">暂无用药数据</div>
+    {% endif %}
+  </section>
+
+  <!-- 影像检查 -->
+  <section class="card lightgreen">
+    <h2>影像检查摘要</h2>
+    {% if imaging_summary %}
+    <table>
+      <thead>
+        <tr><th>日期</th><th>检查项目</th><th>关键发现（对比前片）</th></tr>
+      </thead>
+      <tbody>
+        {% for item in imaging_summary %}
+        <tr>
+          <td>{{ (item.date or '日期待确认') | e }}</td>
+          <td>{{ (item.modality or '') | e }}</td>
+          <td>{{ (item.findings or '') | e }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty">暂无影像检查数据</div>
+    {% endif %}
+  </section>
+
+  <!-- 肿瘤标志物趋势 -->
+  <section class="card lightgreen">
+    {% if tumor_marker_tables or lab_trend %}
+      {# ── CA199 折线图 ── #}
+      {% if chart_svg_ca199 or chart_svg %}
+      <div class="chart-wrap">
+        <div class="chart-title">CA199 指标变化趋势（U/mL）</div>
+        <div class="chart">
+          {{ (chart_svg_ca199 or chart_svg) | safe }}
+        </div>
+      </div>
+      {% endif %}
+
+      {# ── 分标志物单独表格 ── #}
+      {% if tumor_marker_tables %}
+        {% for marker_name, marker_data in tumor_marker_tables.items() %}
+        <h2>{{ marker_name | e }} 完整数据记录</h2>
+        <table>
+          <thead>
+            <tr><th>日期</th><th>{{ marker_name | e }}（{{ (marker_data.unit or '') | e }}）</th><th>变化</th><th>临床备注</th></tr>
+          </thead>
+          <tbody>
+            {% for row in marker_data.rows %}
+            <tr{% if loop.last %} class="latest"{% endif %}>
+              <td>{{ (row.date or '') | e }}</td>
+              <td{% if row.is_abnormal %} style="color:#c83333;font-weight:700"{% endif %}>{{ (row.value or '—') | safe }}</td>
+              <td>{{ (row.change or '—') | safe }}</td>
+              <td>{{ (row.note or '') | safe }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="footer">参考值范围：{{ (marker_data.ref_range or '') | e }}</div>
+        {% endfor %}
+      {% elif lab_trend %}
+        {# ── 兜底：单表格（旧格式）── #}
+        <h2>CA199 完整数据记录</h2>
+        <table>
+          <thead>
+            <tr><th>日期</th><th>CA199（U/mL）</th><th>变化</th><th>临床备注</th></tr>
+          </thead>
+          <tbody>
+            {% for row in lab_trend %}
+            <tr{% if loop.last %} class="latest"{% endif %}>
+              <td>{{ (row.date or '') | e }}</td>
+              <td>{{ (row.ca199 or '—') | e }}</td>
+              <td>{{ (row.cea or '—') | e }}</td>
+              <td>{{ (row.ca125 or '—') | e }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="footer">参考值：CA199 0–37 U/mL · CEA 0–5.2 ng/mL · CA125 0–35 U/mL</div>
+      {% endif %}
+    {% else %}
+      <h2>肿瘤标志物趋势</h2>
+      <div class="empty">暂无检验指标数据</div>
+    {% endif %}
+  </section>
+
+  <!-- 关注问题要点 -->
+  <section class="card red">
+    <h2>关注问题要点</h2>
+    {% if key_concerns %}
+    <ul class="timeline">
+      {% for c in key_concerns %}
+      <li class="alert">{{ c | safe }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div class="empty">暂无关注问题</div>
+    {% endif %}
+  </section>
+
+  <!-- 问诊咨询建议 -->
+  <section class="card purple">
+    <h2>问诊咨询建议</h2>
+    {% if consultation_questions %}
+    <ul class="timeline">
+      {% for q in consultation_questions %}
+      <li>{{ q | e }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div class="empty">暂无咨询建议</div>
+    {% endif %}
+  </section>
+
+  {# ── 11. 附件目录 & 信息缺口 ── #}
+  {% if files or gaps %}
+  <section class="card gray">
+    <h2>附件目录 &amp; 信息缺口</h2>
+    <div class="detail"><details><summary>展开完整附件列表 ▾</summary><div class="detail-body">
+      {% if files %}
+        {% for f in files %}
+        <div>{{ loop.index }}. {{ (f.title or '') | e }}（{{ (f.date or '') | e }}）</div>
+        {% endfor %}
+      {% endif %}
+      {% if gaps %}
+        <div style="margin-top:8px"><b>信息缺口：</b></div>
+        {% for g in gaps %}<div>⚠️ {{ g | e }}</div>{% endfor %}
+      {% endif %}
+    </div></details></div>
+  </section>
+  {% endif %}
+
+  {# ── 免责声明 ── #}
+  <div class="disclaimer">
+    ⚠️ 免责声明：本病例档案仅为医疗资料整理与结构化归档，不构成任何诊断或治疗建议。所有检验数值忠实转录自原始报告，异常标注仅基于参考范围。如有疑问请联系主治医师。{% if updated_at %} 数据截至 {{ (updated_at or '')[:10] | e }}。{% endif %}
+  </div>
+</main>
+</body>
+</html>

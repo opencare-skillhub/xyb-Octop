@@ -3,13 +3,13 @@ requires = ["hatchling>=1.18"]
 build-backend = "hatchling.build"
 
 [project]
-name = "octop"
+name = "xyb-octop"
 version = "1.0.2b5"
 description = "Smarter self-hosted AI assistant for multiple users and agents, built on octop-harness"
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.12"
-authors = [{name = "octop contributors"}]
+authors = [{name = "xyb-octop contributors"}]
 dependencies = [
     "fastapi>=0.110",
     "uvicorn[standard]>=0.27",
@@ -94,6 +94,7 @@ dev = [
 
 [project.scripts]
 octop = "octop.cli.main:cli"
+xyb-octop = "octop.cli.main:cli"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/octop"]
@@ -122,6 +123,21 @@ line-length = 100
 target-version = "py312"
 src = ["src", "tests"]
 include = ["*.py", "*.pyi", "*.pyw", "*.ipynb", "**/pyproject.toml", "**/ruff.toml", "**/.ruff.toml"]
+# Expert-package skill scripts are mostly **vendored upstream code** imported by
+# scripts/xyb_import_skills.py. Reformatting them to our style would silently
+# diverge from upstream and make the next import a diff of cosmetic churn.
+# `[tool.mypy].exclude` already skips the same tree; this keeps the two tools
+# consistent. Our own generated scripts (e.g. the shared profile.py) are still
+# clean and are formatted explicitly when generated.
+exclude = [
+    "src/octop/infra/agents/experts/library/xyb-community-ops/skills/nccn-download/scripts/",
+    "src/octop/infra/agents/experts/library/xyb-trial-matching/skills/chictr-collect/src/",
+    "src/octop/infra/agents/experts/library/xyb-mdt-surgery/skills/record-organizer/scripts/",
+    "src/octop/infra/agents/experts/library/xyb-trial-matching/skills/chinadrugs-collect/scripts/",
+    "src/octop/infra/agents/experts/library/xyb-mdt-imaging/skills/dicom-download/",
+    "src/octop/infra/agents/experts/library/xyb-community-ops/skills/wechat-article/skills/scripts/",
+    "src/octop/infra/agents/experts/library/xyb-mdt-oncology/skills/lab-to-profile/scripts/",
+]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "SIM", "C4"]

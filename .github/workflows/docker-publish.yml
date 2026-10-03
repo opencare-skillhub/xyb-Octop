@@ -1,7 +1,7 @@
 name: Docker Publish
 
 # 仅在版本标签（v*）上构建并同步发布镜像到 Docker Hub 与 GHCR。
-# 文档与对外引用统一使用：ghcr.io/tencentcloud/octop
+# 文档与对外引用统一使用：ghcr.io/opencare-skillhub/xyb-octop
 # （Hub 仍用 DOCKERHUB_* secrets 同步推送。）
 #
 # 触发路径：
@@ -14,8 +14,8 @@ name: Docker Publish
 # FnOS FPK 由 Release 成功后自动 dispatch，并等待本工作流推送的 :{version} 就绪。
 #
 # 拉取示例：
-#   docker pull ghcr.io/tencentcloud/octop:latest
-#   docker pull ghcr.io/tencentcloud/octop:0.9.28
+#   docker pull ghcr.io/opencare-skillhub/xyb-octop:latest
+#   docker pull ghcr.io/opencare-skillhub/xyb-octop:0.9.28
 on:
   push:
     tags:
@@ -74,7 +74,7 @@ jobs:
         id: image
         run: |
           echo "ghcr=ghcr.io/$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
-          echo "hub=${{ secrets.DOCKERHUB_USERNAME }}/octop" >> "$GITHUB_OUTPUT"
+          echo "hub=${{ secrets.DOCKERHUB_USERNAME }}/xyb-octop" >> "$GITHUB_OUTPUT"
 
       - name: Docker metadata
         id: meta

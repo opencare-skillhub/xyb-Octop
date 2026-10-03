@@ -7,7 +7,7 @@
 # Playwright Chromium 不再预装，浏览器自动化可在控制台按需安装。
 #
 # 构建上下文必须为仓库根目录（fnpack / CI 中以仓库根为 context）：
-#   docker build -f fnos/docker/Dockerfile -t ghcr.io/tencentcloud/octop:latest .
+#   docker build -f fnos/docker/Dockerfile -t ghcr.io/opencare-skillhub/xyb-octop:latest .
 #
 # 国内加速（可选 build-arg）：
 #   PIP_INDEX_URL / PIP_TRUSTED_HOST / NPM_REGISTRY / APT_MIRROR
@@ -40,7 +40,7 @@ FROM python:3.12-slim AS runtime
 LABEL maintainer="TencentCloud OrcaKit"
 LABEL org.opencontainers.image.title="Octop"
 LABEL org.opencontainers.image.description="Smarter self-hosted AI assistant — multi-user, multi-agent (FnOS build with all addons)."
-LABEL org.opencontainers.image.source="https://github.com/TencentCloud/Octop"
+LABEL org.opencontainers.image.source="https://github.com/opencare-skillhub/xyb-Octop"
 LABEL org.opencontainers.image.licenses="MIT"
 
 ENV PYTHONDONTWRITEBYTECODE=1 \

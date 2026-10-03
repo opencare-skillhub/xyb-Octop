@@ -9,3 +9,6 @@ entry: main.py
 ui:
   entry: ui/index.js
   manifest: ui/manifest.json
+
+# xiaoyibao: patient-facing default. Off unless the user turns it on.
+default_enabled: false

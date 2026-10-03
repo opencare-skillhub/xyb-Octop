@@ -1,0 +1,60 @@
+{
+  "id": "xyb-mdt-nutrition",
+  "label": {
+    "zh": "营养科视角",
+    "en": "Clinical Nutrition Perspective"
+  },
+  "description": {
+    "zh": "从营养科角度帮你梳理：体重和进食怎么评估、胰酶不足（胰腺外分泌功能不全）怎么识别、血糖怎么配合、什么时候需要营养支持、进食路径怎么选。产出是「该问营养科或主管医生什么」。",
+    "en": "Organises the nutrition view: weight and intake assessment, exocrine insufficiency, glucose control, when to add support, and feeding routes."
+  },
+  "welcome_message": {
+    "zh": "我是营养科视角助手。体重下降和吃不下东西是胰腺癌患者最常见也最容易被忽视的问题。我帮你把「体重变化、进食量、胰酶、血糖、营养支持」这几件事分开评估，并告诉你该问营养科医生什么。我不会给你开具体的饮食方案或补充剂剂量。",
+    "en": "I help you separate weight, intake, pancreatic enzymes, glucose, and nutrition support, and tell you what to ask. I do not prescribe diets or doses."
+  },
+  "icon_name": "apple",
+  "color": "#16A34A",
+  "prompt_files": ["SOUL.md", "AGENTS.md", "BOOTSTRAP.md"],
+  "quick_prompts": [
+    {
+      "title": { "zh": "评估我的营养状况", "en": "Assess my nutrition" },
+      "description": { "zh": "按体重、进食、化验梳理", "en": "Work through weight, intake, and labs" },
+      "prompt": { "zh": "我最近体重变化是【】，每天大概能吃【】，请帮我按营养评估的维度梳理现状，并指出我还需要提供哪些信息。", "en": "My weight trend is [...] and I eat about [...]. Organise my nutrition status and tell me what is missing." },
+      "color": "#dcfce7",
+      "icon_name": "scale"
+    },
+    {
+      "title": { "zh": "胰酶不足怎么判断", "en": "Exocrine insufficiency" },
+      "description": { "zh": "胰腺外分泌功能不全的识别", "en": "Recognising EPI" },
+      "prompt": { "zh": "怎么判断我是不是胰腺外分泌功能不全？有哪些表现和检查可以参考？如果医生考虑这个问题，我该问什么？", "en": "How is exocrine pancreatic insufficiency recognised, and what should I ask if it is suspected?" },
+      "color": "#e0f2fe",
+      "icon_name": "flask-conical"
+    },
+    {
+      "title": { "zh": "血糖怎么配合治疗", "en": "Glucose alongside treatment" },
+      "description": { "zh": "血糖与治疗的相互影响", "en": "How glucose interacts with treatment" },
+      "prompt": { "zh": "我的血糖不稳定，这和胰腺本身、治疗、饮食各有什么关系？我需要记录什么、问医生什么？", "en": "My glucose is unstable. How do the pancreas, treatment, and diet each contribute, and what should I track?" },
+      "color": "#fef3c7",
+      "icon_name": "activity"
+    },
+    {
+      "title": { "zh": "需要营养支持吗", "en": "Do I need nutrition support" },
+      "description": { "zh": "口服补充与进食路径的讨论维度", "en": "Oral supplements and feeding routes" },
+      "prompt": { "zh": "什么情况下需要考虑营养支持？口服补充、管饲、静脉营养分别适用于什么情况？我该问医生什么？", "en": "When is nutrition support considered, and how do oral, enteral, and parenteral routes differ?" },
+      "color": "#ede9fe",
+      "icon_name": "plus-circle"
+    }
+  ],
+  "task_examples": {
+    "zh": [
+      "每周一「09:00」提醒我称体重并记录一周进食情况",
+      "每两周「20:00」把体重与进食记录整理成趋势表",
+      "复诊前「09:00」列出营养相关待问问题与需要带的化验"
+    ],
+    "en": [
+      "Every Monday at 09:00, remind me to weigh in and log the week's intake",
+      "Every two weeks at 20:00, turn weight and intake into a trend table",
+      "Before visits at 09:00, list nutrition questions and which labs to bring"
+    ]
+  }
+}

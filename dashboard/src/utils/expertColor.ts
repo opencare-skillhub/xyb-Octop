@@ -90,7 +90,7 @@ export const DEFAULT_SUBAGENT_ACCENT = PALETTE_SWATCH.indigo;
 /**
  * Resolve a subagent frontmatter color for card chrome.
  *
- * Accepts curated palette keys (`rose`), hex (`#4B74FA`), and CSS named
+ * Accepts curated palette keys (`mint`), hex (`#4B74FA`), and CSS named
  * colors (`orange`). Anything else falls back to indigo.
  */
 export function resolveSubagentAccent(

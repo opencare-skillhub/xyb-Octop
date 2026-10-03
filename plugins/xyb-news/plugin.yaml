@@ -1,0 +1,9 @@
+id: xyb-news
+version: 0.1.0
+name: 看进展
+description: 汇集胰腺癌药物与研究进展（PubMed），只列标题、来源、时间与原文链接，方便自行跟进
+icon: "📖"
+kind: tool
+entry: main.py
+requires:
+  - httpx>=0.27

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/readme-banner.png" alt="Octop Banner" width="600" />
+  <img src="docs/assets/readme-banner.png" alt="小胰宝 Banner" width="600" />
 </p>
 
 <p align="center">
@@ -8,18 +8,18 @@
 
 <p align="center">
   <a href="https://trendshift.io/repositories/95504?utm_source=repository-badge&utm_medium=badge&utm_campaign=badge-repository-95504" target="_blank" rel="noopener noreferrer">
-    <img src="https://trendshift.io/api/badge/repositories/95504" alt="TencentCloud/Octop | Trendshift" width="250" height="55" />
+    <img src="https://trendshift.io/api/badge/repositories/95504" alt="TencentCloud/小胰宝 | Trendshift" width="250" height="55" />
   </a>
 </p>
 
 <p align="center">
   <a href="https://www.python.org/downloads/"><img alt="Python 3.12+" src="https://img.shields.io/badge/python-3.12%2B-blue?logo=python&logoColor=white" /></a>
-  <a href="https://github.com/TencentCloud/Octop/blob/main/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green" /></a>
-  <a href="https://github.com/TencentCloud/Octop/releases"><img alt="Version" src="https://img.shields.io/badge/version-1.0.2b5-orange" /></a>
+  <a href="https://github.com/TencentCloud/小胰宝/blob/main/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green" /></a>
+  <a href="https://github.com/TencentCloud/小胰宝/releases"><img alt="Version" src="https://img.shields.io/badge/version-1.0.2b5-orange" /></a>
   <a href="https://pypi.org/project/octop/"><img src="https://img.shields.io/pypi/v/octop" alt="PyPI" /></a>
   <a href="https://github.com/astral-sh/ruff"><img alt="Code Style: Ruff" src="https://img.shields.io/badge/code%20style-ruff-000000?logo=ruff&logoColor=white" /></a>
-  <a href="https://github.com/TencentCloud/Octop"><img alt="GitHub stars" src="https://img.shields.io/github/stars/TencentCloud/Octop?style=social" /></a>
-  <a href="https://github.com/TencentCloud/Octop/fork"><img alt="GitHub forks" src="https://img.shields.io/github/forks/TencentCloud/Octop?style=social" /></a>
+  <a href="https://github.com/TencentCloud/小胰宝"><img alt="GitHub stars" src="https://img.shields.io/github/stars/TencentCloud/小胰宝?style=social" /></a>
+  <a href="https://github.com/TencentCloud/小胰宝/fork"><img alt="GitHub forks" src="https://img.shields.io/github/forks/TencentCloud/小胰宝?style=social" /></a>
   <a href="https://discord.gg/jPas5J8Ua"><img alt="Discord" src="https://img.shields.io/badge/Discord-Join%20Us-5865F2?logo=discord&logoColor=white" /></a>
 </p>
 
@@ -39,7 +39,7 @@
 
 ---
 
-**Octop** is an open-source, self-hosted AI assistant. It's not just a tool — it's a digital life form that can operate in parallel. Through its multi-agent architecture, it builds an intelligent environment that is both independent and collaborative for teams, families, and individuals. Best of all, it runs entirely on your machine — the fully self-hosted design means privacy is never a compromise, while single-process startup makes the powerful web console, CLI, and IM integrations readily accessible.
+**小胰宝** is an open-source, self-hosted AI assistant. It's not just a tool — it's a digital life form that can operate in parallel. Through its multi-agent architecture, it builds an intelligent environment that is both independent and collaborative for teams, families, and individuals. Best of all, it runs entirely on your machine — the fully self-hosted design means privacy is never a compromise, while single-process startup makes the powerful web console, CLI, and IM integrations readily accessible.
 
 Chat through the Web Dashboard, Feishu, DingTalk, QQ, WeChat, Telegram, Discord, WeCom, or programmatic HTTP/SSE/WebSocket. Extend capabilities with the **expert library**, **Connectors** (OAuth + MCP), and **ACP** integration for IDE workflows.
 
@@ -54,9 +54,9 @@ Chat through the Web Dashboard, Feishu, DingTalk, QQ, WeChat, Telegram, Discord,
 | 🔒 | **Security built-in** | JWT multi-user isolation, tool approval, shell command guardrails, and PII redaction — data stays local |
 | 🔌 | **Connector ecosystem** | Tencent suite (Docs, Meeting, News, …); OAuth and MCP gateway extend resource boundaries |
 | 💾 | **Pluggable workspace backends** | Local disk, Docker sandbox, PostgreSQL, or COS/S3 for agent files — separate from the control-plane DB |
-| 🧠 | **Portable memory** | Powered by [Octop Memory](https://github.com/TencentCloud/octop-memory); memory migrates with the workspace |
+| 🧠 | **Portable memory** | Powered by [小胰宝 Memory](https://github.com/TencentCloud/octop-memory); memory migrates with the workspace |
 | 📚 | **Knowledge base** | RAG over your documents; share corpora within a deployment and ground answers in your private data |
-| 🧩 | **Plugins** | Extend Octop with third-party plugins; bundled plugins are seeded and toggled on demand |
+| 🧩 | **Plugins** | Extend 小胰宝 with third-party plugins; bundled plugins are seeded and toggled on demand |
 | ↔️ | **ACP bidirectional** | `octop acp` for IDE/terminal AI; delegate to OpenCode / Claude Code with permission gates |
 | 💻 | **Terminal AI+** | Interactive shell in the browser — AI-assisted command execution and troubleshooting |
 | 🌐 | **Browser AI+** | Headless Chromium sessions for web automation, screenshots, and remote browsing |
@@ -66,12 +66,12 @@ Chat through the Web Dashboard, Feishu, DingTalk, QQ, WeChat, Telegram, Discord,
 
 ## 📌 Overview
 
-Octop is a self-hosted AI assistant platform for households and small teams. It runs a single process that serves a web dashboard, a CLI, IM channels (Feishu, DingTalk, QQ, WeChat, Telegram, Discord, WeCom, and more), and cron automation — all sharing one control-plane database under `~/.octop/` (SQLite by default; PostgreSQL optional).
+小胰宝 is a self-hosted AI assistant platform for households and small teams. It runs a single process that serves a web dashboard, a CLI, IM channels (Feishu, DingTalk, QQ, WeChat, Telegram, Discord, WeCom, and more), and cron automation — all sharing one control-plane database under `~/.octop/` (SQLite by default; PostgreSQL optional).
 
-> Octop's design goal: keep every conversation, workspace, and credential on your own machine, while giving each user a personal team of specialized agents they can switch between per task.
+> 小胰宝's design goal: keep every conversation, workspace, and credential on your own machine, while giving each user a personal team of specialized agents they can switch between per task.
 
 <details>
-<summary>🐾 What can you do with Octop</summary>
+<summary>🐾 What can you do with 小胰宝</summary>
 
 - **Personal assistant** — let a dedicated agent write weekly reports, organize notes, and manage your schedule; memory persists with the workspace.
 - **Family sharing** — one admin account, the whole household; assign different agents and experts per member; share experts and knowledge bases when useful.
@@ -88,22 +88,22 @@ Octop is a self-hosted AI assistant platform for households and small teams. It 
 |-------|-----------|
 | **Language** | Python 3.12+ |
 | **Web framework** | FastAPI + uvicorn |
-| **Agent runtime** | [Octop Harness](https://github.com/TencentCloud/octop-harness) |
-| **Gateway** | [Octop Gateway](https://github.com/TencentCloud/octop-gateway) |
+| **Agent runtime** | [小胰宝 Harness](https://github.com/TencentCloud/octop-harness) |
+| **Gateway** | [小胰宝 Gateway](https://github.com/TencentCloud/octop-gateway) |
 | **Control plane DB** | SQLite (WAL, default) or PostgreSQL (optional) |
 | **Frontend** | React 18 + TypeScript + Vite + Ant Design |
 | **Scheduling** | APScheduler |
 | **ACP** | agent-client-protocol |
 | **Build / quality** | hatchling · ruff · mypy · pytest |
 
-Octop is built on the Octop Harness stack — a set of focused runtimes that Octop composes into one process:
+小胰宝 is built on the 小胰宝 Harness stack — a set of focused runtimes that 小胰宝 composes into one process:
 
-- **[Octop Harness](https://github.com/TencentCloud/octop-harness)** — Agent runtime: model routing, tools, skills, and conversation checkpointing.
-- **[Octop Gateway](https://github.com/TencentCloud/octop-gateway)** — multi-platform IM channel bridge that normalizes incoming messages into a single processing pipeline.
-- **[Octop Memory](https://github.com/TencentCloud/octop-memory)** — hierarchical recall with full-text search, so an agent's memory travels with its workspace.
-- **[Octop Browser](https://github.com/TencentCloud/octop-browser)** — CDP-based browser automation with persistent profiles for web tasks.
+- **[小胰宝 Harness](https://github.com/TencentCloud/octop-harness)** — Agent runtime: model routing, tools, skills, and conversation checkpointing.
+- **[小胰宝 Gateway](https://github.com/TencentCloud/octop-gateway)** — multi-platform IM channel bridge that normalizes incoming messages into a single processing pipeline.
+- **[小胰宝 Memory](https://github.com/TencentCloud/octop-memory)** — hierarchical recall with full-text search, so an agent's memory travels with its workspace.
+- **[小胰宝 Browser](https://github.com/TencentCloud/octop-browser)** — CDP-based browser automation with persistent profiles for web tasks.
 
-Instead of an external queue or message broker, Octop routes every surface — Web UI, IM, and cron — through one in-process `HarnessProcessor`. The result is a single, restart-safe process whose entire state is rebuilt from the control-plane database on boot (local SQLite by default; PostgreSQL optional).
+Instead of an external queue or message broker, 小胰宝 routes every surface — Web UI, IM, and cron — through one in-process `HarnessProcessor`. The result is a single, restart-safe process whose entire state is rebuilt from the control-plane database on boot (local SQLite by default; PostgreSQL optional).
 
 ## 🤔 Features
 
@@ -137,14 +137,14 @@ Instead of an external queue or message broker, Octop routes every surface — W
 
 ### ACP (Agent Client Protocol)
 
-Octop supports ACP in two directions:
+小胰宝 supports ACP in two directions:
 
-1. **Inbound** — external tools use **your** Octop agent
+1. **Inbound** — external tools use **your** 小胰宝 agent
    ```bash
    octop acp --agent main   # stdio ACP server for Zed, OpenCode, …
    ```
 
-2. **Outbound** — Octop delegates to external coding agents
+2. **Outbound** — 小胰宝 delegates to external coding agents
    - Dashboard → **ACP** (`/acp`): configure runners (global per user)
    - Enable **acp_runner** per agent, then delegate in chat
 
@@ -170,9 +170,9 @@ Here are our mid-to-long term plans:
 - [ ] **Self-evolution** — automatically distill everyday conversations into reusable skills, so the assistant grows with you.
 - [ ] **Managed Agents** — platform-hosted agent lifecycle (provision, scale, and operate agents without managing the full self-hosted stack yourself).
 - [ ] **Project** — project-scoped workspaces that group agents, files, and conversations around a shared goal.
-- [ ] **Cloud–edge continuum** — run Octop locally while offloading selected tasks to the cloud, so light work stays on-device and heavier jobs use remote capacity when you need it.
-- [ ] **Plugin marketplace** — a curated market to discover, install, and update third-party plugins without leaving Octop.
-- [ ] **Conversational control plane** — deepen Octop’s own skills so chat can cover the full dashboard surface: create experts, wire channels, manage knowledge bases, and scaffold plugins end-to-end.
+- [ ] **Cloud–edge continuum** — run 小胰宝 locally while offloading selected tasks to the cloud, so light work stays on-device and heavier jobs use remote capacity when you need it.
+- [ ] **Plugin marketplace** — a curated market to discover, install, and update third-party plugins without leaving 小胰宝.
+- [ ] **Conversational control plane** — deepen 小胰宝’s own skills so chat can cover the full dashboard surface: create experts, wire channels, manage knowledge bases, and scaffold plugins end-to-end.
 
 This roadmap may shift as the community grows; treat it as indicative only.
 
@@ -222,14 +222,14 @@ curl -fsSL https://finnie-1258344699.cos.ap-guangzhou.myqcloud.com/octop/install
 
 See [scripts/README.md](scripts/README.md) for all install options (`--version`, `--from-source`, `--mirror`, Windows flags).
 
-**Desktop app** (GUI, no terminal) — grab the artifact for your platform from [GitHub Releases](https://github.com/TencentCloud/Octop/releases/latest):
+**Desktop app** (GUI, no terminal) — grab the artifact for your platform from [GitHub Releases](https://github.com/TencentCloud/小胰宝/releases/latest):
 
 | Platform | Artifact |
 |----------|----------|
-| Windows | `Octop-desktop-windows-amd64-<version>.exe` (64-bit) / `Octop-desktop-windows-arm64-<version>.exe` (ARM64) — NSIS installer |
-| macOS | `Octop-desktop-darwin-arm64-<version>.dmg` (Apple Silicon) / `Octop-desktop-darwin-amd64-<version>.dmg` (Intel) |
-| Linux | `Octop-desktop-linux-amd64-<version>.tar.gz` / `Octop-desktop-linux-arm64-<version>.tar.gz` |
-| FnOS NAS | `Octop-fnos-docker-<version>.fpk` (Docker-backed) / `Octop-fnos-native-<version>.fpk` (no Docker) — install via App Center |
+| Windows | `小胰宝-desktop-windows-amd64-<version>.exe` (64-bit) / `小胰宝-desktop-windows-arm64-<version>.exe` (ARM64) — NSIS installer |
+| macOS | `小胰宝-desktop-darwin-arm64-<version>.dmg` (Apple Silicon) / `小胰宝-desktop-darwin-amd64-<version>.dmg` (Intel) |
+| Linux | `小胰宝-desktop-linux-amd64-<version>.tar.gz` / `小胰宝-desktop-linux-arm64-<version>.tar.gz` |
+| FnOS NAS | `小胰宝-fnos-docker-<version>.fpk` (Docker-backed) / `小胰宝-fnos-native-<version>.fpk` (no Docker) — install via App Center |
 
 See [desktop/README.md](desktop/README.md) for the desktop shell and [fnos/README.md](fnos/README.md) for the FnOS packaging guide.
 
@@ -255,6 +255,8 @@ uv sync --extra local-embedding
 octop init
 ```
 
+`xyb-octop` is a branded alias for the same CLI — every `octop …` command on this page also runs as `xyb-octop …`.
+
 The interactive wizard creates the SQLite database, JWT secret, and first admin account under `~/.octop/`.
 
 ### 3. Run
@@ -262,6 +264,8 @@ The interactive wizard creates the SQLite database, JWT secret, and first admin 
 ```bash
 # Foreground (API + Web dashboard)
 octop run
+# or the alias, from a source checkout with uv:
+uv run xyb-octop run
 
 # Custom host / port
 octop run --host 0.0.0.0 --port 8088
@@ -312,6 +316,7 @@ See [`.env.example`](.env.example) for the full list.
 - **Deploy & Use**
   - [Install options](#-install-options)
   - [Configuration](#️-configuration)
+  - [MCP servers](#-mcp-servers)
   - [CLI reference](#-cli-reference)
   - [Web dashboard](#️-web-dashboard)
   - [Data directory](#-data-directory)
@@ -393,12 +398,62 @@ OpenAI-compatible APIs, DashScope (Qwen), Ollama, and other presets — configur
 
 Other kinds (e.g. Yuanbao, Xiaoyi, MQTT) are available via the gateway — see channel setup in the dashboard or CLI.
 
+## 🔌 MCP servers
+
+小胰宝 ships a curated set of clinical MCP servers for the trial-matching
+experts. They are **not installed by default** — seed them for one user with:
+
+```bash
+octop xyb init-mcp --user admin            # add-only + idempotent
+octop xyb init-mcp --user admin --dry-run  # print the plan, write nothing
+octop xyb init-mcp --user admin --only xyb-veeva
+```
+
+| Server | Channel | Transport | Prerequisite |
+|--------|---------|-----------|--------------|
+| `xyb-clinicaltrials` | ClinicalTrials.gov | `npx` (stdio) | none — public |
+| `xyb-chictr` | 中国临床试验注册中心 | `npx` (stdio) | first run pulls npm + Playwright Chromium (~570 MB); the site may ask for human verification |
+| `xyb-veeva` | Veeva CTV | local `node` (stdio) | a built `ctv-mcp-server` checkout; point `XYB_VEEVA_DIR` at it |
+| `xyb-pubmed` | PubMed literature | `npx` (stdio) | none — `PUBMED_API_KEY` raises the rate limit |
+| `xyb-metaso` | 秘塔 web search | `npx` (stdio) | `METASO_API_KEY` — skipped when unset |
+| `xyb-dayi` | 日大医 drug / disease lookup | `npx` (stdio) | none — public |
+
+Seeded servers carry `enabled` **and** `default_open`, so their tools attach to
+every turn without an explicit pick. The seeder is **add-only**: a name you
+already configured is never overwritten, and a server whose prerequisite is
+missing is reported (not written as a broken command).
+
+`chinadrugs` is deliberately *not* seeded as an MCP server — it ships as the
+`chinadrugs-collect` CLI skill that drives the registry with the patient's own
+browser session.
+
+Add your own server in the dashboard (**Connectors → Custom MCP**) or via
+`PUT /api/connectors/custom-mcp`; `POST /api/connectors/custom-mcp/test` probes
+one before saving.
+
+Verify without an LLM (no running server needed — it speaks MCP over stdio the
+way the connector gateway does):
+
+```bash
+scripts/xyb-check-mcp.sh --list      # known servers + launch commands, starts nothing
+scripts/xyb-check-mcp.sh xyb-veeva   # real initialize + tools/list handshake
+scripts/xyb-check-mcp.sh --json      # machine-readable report
+```
+
+It reports the `serverInfo.version` each server **actually** returns and its tool
+count, so version drift is visible instead of assumed. `xyb-veeva` alone exposes
+12 tools — `search_studies`, `get_study_detail` (37 fields incl. eligibility
+criteria), `export_rag`, `generate_report`, watchlists and more.
+
+Hand the whole setup to an agent instead: **[docs/xyb-mcp-setup.md](docs/xyb-mcp-setup.md)**
+carries a one-sentence prompt plus the manual fallback and verification steps.
+
 ## 📖 CLI reference
 
 | Command | Description |
 |---------|-------------|
 | `octop init` | Bootstrap `~/.octop/` (DB, admin, JWT secret) |
-| `octop run` | Start Octop in the foreground |
+| `octop run` | Start 小胰宝 in the foreground |
 | `octop service start` | Install and start as a system service |
 | `octop service stop` | Stop the system service |
 | `octop agent` | Create, list, start/stop agents |
@@ -428,7 +483,7 @@ Full reference: **[docs/cli.md](docs/cli.md)**.
 After `octop run`, open **http://127.0.0.1:8088**.
 
 <p align="center">
-  <img src="docs/assets/readme-chat.png" alt="Octop Web Dashboard" width="800" />
+  <img src="docs/assets/readme-chat.png" alt="小胰宝 Web Dashboard" width="800" />
 </p>
 
 - **Chat** — real-time conversation with experts and teams
@@ -547,10 +602,10 @@ See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 | Project | Description |
 |---------|-------------|
-| [Octop Harness](https://github.com/TencentCloud/octop-harness) | Agent runtime — model routing, tools, skills, checkpointing |
-| [Octop Gateway](https://github.com/TencentCloud/octop-gateway) | Multi-platform IM channel bridge |
-| [Octop Memory](https://github.com/TencentCloud/octop-memory) | Hierarchical recall and FTS search |
-| [Octop Browser](https://github.com/TencentCloud/octop-browser) | CDP browser automation with persistent profiles |
+| [小胰宝 Harness](https://github.com/TencentCloud/octop-harness) | Agent runtime — model routing, tools, skills, checkpointing |
+| [小胰宝 Gateway](https://github.com/TencentCloud/octop-gateway) | Multi-platform IM channel bridge |
+| [小胰宝 Memory](https://github.com/TencentCloud/octop-memory) | Hierarchical recall and FTS search |
+| [小胰宝 Browser](https://github.com/TencentCloud/octop-browser) | CDP browser automation with persistent profiles |
 
 ## 💬 Community
 
