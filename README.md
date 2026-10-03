@@ -57,12 +57,12 @@ Chat through the Web Dashboard, Feishu, DingTalk, QQ, WeChat, Telegram, Discord,
 | 🧠 | **Portable memory** | Powered by [小胰宝 Memory](https://github.com/TencentCloud/octop-memory); memory migrates with the workspace |
 | 📚 | **Knowledge base** | RAG over your documents; share corpora within a deployment and ground answers in your private data |
 | 🧩 | **Plugins** | Extend 小胰宝 with third-party plugins; bundled plugins are seeded and toggled on demand |
-| ↔️ | **ACP bidirectional** | `octop acp` for IDE/terminal AI; delegate to OpenCode / Claude Code with permission gates |
+| ↔️ | **ACP bidirectional** | `xyb-octop acp` for IDE/terminal AI; delegate to OpenCode / Claude Code with permission gates |
 | 💻 | **Terminal AI+** | Interactive shell in the browser — AI-assisted command execution and troubleshooting |
 | 🌐 | **Browser AI+** | Headless Chromium sessions for web automation, screenshots, and remote browsing |
 | 🖥️ | **Remote desktop** | Live screen and input from the dashboard on Linux, Windows, and macOS — remote office work and GUI apps; one-click isolated desktop on headless Linux |
 | 🪟 | **Desktop client** | Native Windows / macOS / Linux apps (and FnOS packages) alongside the web dashboard |
-| 🏠 | **Self-hosted** | Dashboard, CLI, IM channels, and cron in one `octop run` — all data under `~/.octop/` |
+| 🏠 | **Self-hosted** | Dashboard, CLI, IM channels, and cron in one `xyb-octop run` — all data under `~/.octop/` |
 
 ## 📌 Overview
 
@@ -109,7 +109,7 @@ Instead of an external queue or message broker, 小胰宝 routes every surface �
 
 ### Server & auth
 - Multi-user JWT authentication with admin role
-- First-run setup wizard (`octop init`)
+- First-run setup wizard (`xyb-octop init`)
 - Interactive API docs at `/api/docs` (off by default — set `"enable_api_docs": true` in `config.json` to enable)
 
 ### Experts
@@ -127,13 +127,13 @@ Instead of an external queue or message broker, 小胰宝 routes every surface �
 ### Surfaces
 - **Web dashboard** — chat, experts / teams, connectors, channels, cron, knowledge, plugins, settings
 - **Desktop client** — native apps for Windows / macOS / Linux; FnOS packages for NAS
-- **CLI** — `octop run`, `octop chats`, `octop acp`, admin commands
+- **CLI** — `xyb-octop run`, `xyb-octop chats`, `xyb-octop acp`, admin commands
 - **HTTP/SSE/WebSocket API** — full programmatic access
 - **Remote desktop** — dashboard control of the host desktop session
 
 ### Knowledge & plugins
 - **Knowledge base** — RAG over your documents; optional sharing within the same deployment
-- **Plugins** — install and manage third-party plugins (`octop plugin`); bundled plugins are seeded and toggled on demand from the dashboard
+- **Plugins** — install and manage third-party plugins (`xyb-octop plugin`); bundled plugins are seeded and toggled on demand from the dashboard
 
 ### ACP (Agent Client Protocol)
 
@@ -141,7 +141,7 @@ Instead of an external queue or message broker, 小胰宝 routes every surface �
 
 1. **Inbound** — external tools use **your** 小胰宝 agent
    ```bash
-   octop acp --agent main   # stdio ACP server for Zed, OpenCode, …
+   xyb-octop acp --agent main   # stdio ACP server for Zed, OpenCode, …
    ```
 
 2. **Outbound** — 小胰宝 delegates to external coding agents
@@ -252,10 +252,10 @@ uv sync --extra local-embedding
 ### 2. Initialize
 
 ```bash
-octop init
+xyb-octop init
 ```
 
-`xyb-octop` is a branded alias for the same CLI — every `octop …` command on this page also runs as `xyb-octop …`.
+`octop` is an equivalent alias for the same CLI — every `xyb-octop …` command on this page also runs as `octop …`.
 
 The interactive wizard creates the SQLite database, JWT secret, and first admin account under `~/.octop/`.
 
@@ -263,18 +263,18 @@ The interactive wizard creates the SQLite database, JWT secret, and first admin 
 
 ```bash
 # Foreground (API + Web dashboard)
-octop run
-# or the alias, from a source checkout with uv:
+xyb-octop run
+# from a source checkout with uv:
 uv run xyb-octop run
 
 # Custom host / port
-octop run --host 0.0.0.0 --port 8088
+xyb-octop run --host 0.0.0.0 --port 8088
 
 # Register as a system service (systemd / launchd / Windows service)
-octop service start
+xyb-octop service start
 ```
 
-Open **http://127.0.0.1:8088**. With Docker, the first init generates a random admin password (written to `/data/.octop/credential.txt`) unless `OCTOP_DEFAULT_PASSWORD` is set. Interactive `octop init` / the setup wizard asks you to choose a password (≥8 characters, letters and digits).
+Open **http://127.0.0.1:8088**. With Docker, the first init generates a random admin password (written to `/data/.octop/credential.txt`) unless `OCTOP_DEFAULT_PASSWORD` is set. Interactive `xyb-octop init` / the setup wizard asks you to choose a password (≥8 characters, letters and digits).
 
 ### Docker (recommended for production)
 
@@ -347,13 +347,13 @@ All install scripts provision an isolated environment at `~/.octop/venv` and a `
 
 ### Upgrade
 
-`octop update` replaces only the wheel/binary — your `~/.octop/` database, workspaces, secrets, and `config.json` are preserved:
+`xyb-octop update` replaces only the wheel/binary — your `~/.octop/` database, workspaces, secrets, and `config.json` are preserved:
 
 ```bash
-octop update          # fetch and install the latest octop, then restart the service if one is registered
+xyb-octop update          # fetch and install the latest octop, then restart the service if one is registered
 ```
 
-The schema migrates automatically on next boot; run `octop init` only if the setup wizard prompts for a migration. Always back up first (`octop backup`) before a cross-version upgrade.
+The schema migrates automatically on next boot; run `xyb-octop init` only if the setup wizard prompts for a migration. Always back up first (`xyb-octop backup`) before a cross-version upgrade.
 
 ## ⚙️ Configuration
 
@@ -361,27 +361,27 @@ All runtime state lives in `~/.octop/`. Manage it via CLI or edit files directly
 
 ```bash
 # LLM providers and models
-octop models
-octop provider list
+xyb-octop models
+xyb-octop provider list
 
 # IM channels
-octop channel list
-octop channel install
+xyb-octop channel list
+xyb-octop channel install
 
 # Skills (per agent)
-octop skills list --agent main
+xyb-octop skills list --agent main
 
 # Cron jobs
-octop cron list
-octop cron create --help
+xyb-octop cron list
+xyb-octop cron create --help
 
 # Users (admin)
-octop user list
+xyb-octop user list
 ```
 
 ### Supported LLM providers
 
-OpenAI-compatible APIs, DashScope (Qwen), Ollama, and other presets — configure per agent in the dashboard or via `octop provider`.
+OpenAI-compatible APIs, DashScope (Qwen), Ollama, and other presets — configure per agent in the dashboard or via `xyb-octop provider`.
 
 ### Supported channels
 
@@ -404,9 +404,9 @@ Other kinds (e.g. Yuanbao, Xiaoyi, MQTT) are available via the gateway — see c
 experts. They are **not installed by default** — seed them for one user with:
 
 ```bash
-octop xyb init-mcp --user admin            # add-only + idempotent
-octop xyb init-mcp --user admin --dry-run  # print the plan, write nothing
-octop xyb init-mcp --user admin --only xyb-veeva
+xyb-octop xyb init-mcp --user admin            # add-only + idempotent
+xyb-octop xyb init-mcp --user admin --dry-run  # print the plan, write nothing
+xyb-octop xyb init-mcp --user admin --only xyb-veeva
 ```
 
 | Server | Channel | Transport | Prerequisite |
@@ -452,24 +452,24 @@ carries a one-sentence prompt plus the manual fallback and verification steps.
 
 | Command | Description |
 |---------|-------------|
-| `octop init` | Bootstrap `~/.octop/` (DB, admin, JWT secret) |
-| `octop run` | Start 小胰宝 in the foreground |
-| `octop service start` | Install and start as a system service |
-| `octop service stop` | Stop the system service |
-| `octop agent` | Create, list, start/stop agents |
-| `octop channel` | Install and manage IM channels |
-| `octop chats` | REPL and session management |
-| `octop acp` | Stdio ACP server for IDE integration |
-| `octop cron` | Manage scheduled tasks |
-| `octop models` | Provider presets and model resolution |
-| `octop skills` | Enable/disable per-agent skills |
-| `octop plugin` | Install and manage third-party plugins |
-| `octop backup` | Export / restore backups |
-| `octop clean` | Remove CLI state or wipe `~/.octop/` |
-| `octop memory list` | List running agents eligible for memory maintenance; no database changes. |
-| `octop memory slim [--agent ID]` | Back up and slim SQLite memory through the running host; uses the selected agent or prompts by number. Shows terminal and dashboard progress. [Details](docs/memory-slim.md) |
-| `octop memory slim --all` | Sequentially maintain all eligible running agents, with per-agent progress; stops on the first failure. |
-| `octop update` | Check for and install updates |
+| `xyb-octop init` | Bootstrap `~/.octop/` (DB, admin, JWT secret) |
+| `xyb-octop run` | Start 小胰宝 in the foreground |
+| `xyb-octop service start` | Install and start as a system service |
+| `xyb-octop service stop` | Stop the system service |
+| `xyb-octop agent` | Create, list, start/stop agents |
+| `xyb-octop channel` | Install and manage IM channels |
+| `xyb-octop chats` | REPL and session management |
+| `xyb-octop acp` | Stdio ACP server for IDE integration |
+| `xyb-octop cron` | Manage scheduled tasks |
+| `xyb-octop models` | Provider presets and model resolution |
+| `xyb-octop skills` | Enable/disable per-agent skills |
+| `xyb-octop plugin` | Install and manage third-party plugins |
+| `xyb-octop backup` | Export / restore backups |
+| `xyb-octop clean` | Remove CLI state or wipe `~/.octop/` |
+| `xyb-octop memory list` | List running agents eligible for memory maintenance; no database changes. |
+| `xyb-octop memory slim [--agent ID]` | Back up and slim SQLite memory through the running host; uses the selected agent or prompts by number. Shows terminal and dashboard progress. [Details](docs/memory-slim.md) |
+| `xyb-octop memory slim --all` | Sequentially maintain all eligible running agents, with per-agent progress; stops on the first failure. |
+| `xyb-octop update` | Check for and install updates |
 
 In signed-in dashboard or local CLI chat, `/memory slim` explains maintenance for the current agent;
 `/memory slim --all` lists your eligible agents. Add `--confirm` to start after reviewing the impact.
@@ -480,7 +480,7 @@ Full reference: **[docs/cli.md](docs/cli.md)**.
 
 ## 🖥️ Web dashboard
 
-After `octop run`, open **http://127.0.0.1:8088**.
+After `xyb-octop run`, open **http://127.0.0.1:8088**.
 
 <p align="center">
   <img src="docs/assets/readme-chat.png" alt="小胰宝 Web Dashboard" width="800" />

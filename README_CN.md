@@ -56,12 +56,12 @@
 | 🧠 | **可迁移记忆系统** | 基于 [小胰宝 Memory](https://github.com/TencentCloud/octop-memory)，记忆随工作区迁移 |
 | 📚 | **知识库** | 基于文档的 RAG 检索；支持同实例共享语料，让回答锚定私有知识 |
 | 🧩 | **插件** | 支持第三方插件扩展；内置插件随安装注入，按需一键启用 |
-| ↔️ | **ACP 双向集成** | `octop acp` 增强 IDE 与终端 AI；对话中委派 OpenCode / Claude Code 等 |
+| ↔️ | **ACP 双向集成** | `xyb-octop acp` 增强 IDE 与终端 AI；对话中委派 OpenCode / Claude Code 等 |
 | 💻 | **终端 AI+** | 浏览器内交互式 Shell，AI 辅助命令执行与排障 |
 | 🌐 | **浏览器 AI+** | 基于 Chromium 的无头浏览器会话，支持网页自动化、截图与远程操控 |
 | 🖥️ | **远程桌面** | 控制台内实时看屏与键鼠操控，跨 Linux / Windows / macOS；适合远程办公、GUI 软件操作，无图形 Linux 可一键搭建隔离桌面 |
 | 🪟 | **桌面客户端** | Windows / macOS / Linux 原生应用，另有飞牛（FnOS）安装包，可与 Web 控制台并行使用 |
-| 🏠 | **可自托管** | 一条 `octop run` 即可运行控制台、CLI、IM 通道与定时任务，数据存于 `~/.octop/` |
+| 🏠 | **可自托管** | 一条 `xyb-octop run` 即可运行控制台、CLI、IM 通道与定时任务，数据存于 `~/.octop/` |
 
 ## 📌 概述
 
@@ -110,7 +110,7 @@
 
 ### 服务器与认证
 - 多用户 JWT 认证，支持管理员角色
-- 首次运行向导（`octop init`）
+- 首次运行向导（`xyb-octop init`）
 - 交互式 API 文档：`/api/docs`（默认关闭 — 在 `config.json` 中设置 `"enable_api_docs": true` 开启）
 
 ### 专家
@@ -128,13 +128,13 @@
 ### 使用入口
 - **Web 控制台** — 对话、专家 / 团队、连接器、通道、定时任务、知识库、插件、设置
 - **桌面客户端** — Windows / macOS / Linux 原生应用；飞牛（FnOS）安装包
-- **CLI** — `octop run`、`octop chats`、`octop acp`、管理命令
+- **CLI** — `xyb-octop run`、`xyb-octop chats`、`xyb-octop acp`、管理命令
 - **HTTP/SSE/WebSocket API** — 完整的程序化访问能力
 - **远程桌面** — 在控制台操控本机桌面会话
 
 ### 知识库与插件
 - **知识库** — 基于文档的 RAG 检索；支持同实例内共享语料
-- **插件** — 安装并管理第三方插件（`octop plugin`）；内置插件随安装注入，按需在控制台一键启用
+- **插件** — 安装并管理第三方插件（`xyb-octop plugin`）；内置插件随安装注入，按需在控制台一键启用
 
 ### ACP（Agent Client Protocol）
 
@@ -142,7 +142,7 @@
 
 1. **入站** — 外部工具使用**你的** 小胰宝 Agent
    ```bash
-   octop acp --agent main   # 为 Zed、OpenCode 等提供 stdio ACP 服务
+   xyb-octop acp --agent main   # 为 Zed、OpenCode 等提供 stdio ACP 服务
    ```
 
 2. **出站** — 小胰宝 委派给外部编程 Agent
@@ -253,10 +253,10 @@ uv sync --extra local-embedding
 ### 2. 初始化
 
 ```bash
-octop init
+xyb-octop init
 ```
 
-`xyb-octop` 是同一套 CLI 的品牌别名 —— 本文中所有 `octop …` 命令都可以写成 `xyb-octop …`。
+`octop` 是同一套 CLI 的等价别名 —— 本文中所有 `xyb-octop …` 命令都可以写成 `octop …`。
 
 交互式向导会在 `~/.octop/` 下创建 SQLite 数据库、JWT 密钥，并引导你设置首个管理员账号。
 
@@ -264,18 +264,18 @@ octop init
 
 ```bash
 # 前台运行（API + Web 控制台）
-octop run
-# 或使用别名；源码检出时用 uv：
+xyb-octop run
+# 源码检出时用 uv：
 uv run xyb-octop run
 
 # 自定义主机与端口
-octop run --host 0.0.0.0 --port 8088
+xyb-octop run --host 0.0.0.0 --port 8088
 
 # 注册为系统服务（systemd / launchd / Windows 服务）
-octop service start
+xyb-octop service start
 ```
 
-打开 **http://127.0.0.1:8088**。Docker 首次初始化会自动生成随机管理员密码（写入 `/data/.octop/credential.txt`），除非设置了 `OCTOP_DEFAULT_PASSWORD`。交互式 `octop init` / 设置向导会让你自行设置密码（至少 8 位，且同时包含字母和数字）。
+打开 **http://127.0.0.1:8088**。Docker 首次初始化会自动生成随机管理员密码（写入 `/data/.octop/credential.txt`），除非设置了 `OCTOP_DEFAULT_PASSWORD`。交互式 `xyb-octop init` / 设置向导会让你自行设置密码（至少 8 位，且同时包含字母和数字）。
 
 ### Docker（推荐用于生产部署）
 
@@ -349,13 +349,13 @@ docker run -d \
 
 ### 升级
 
-`octop update` 只替换 wheel / 二进制，你的 `~/.octop/` 数据库、工作区、密钥与 `config.json` 均会保留：
+`xyb-octop update` 只替换 wheel / 二进制，你的 `~/.octop/` 数据库、工作区、密钥与 `config.json` 均会保留：
 
 ```bash
-octop update          # 获取并安装最新版 小胰宝，若已注册系统服务则自动重启
+xyb-octop update          # 获取并安装最新版 小胰宝，若已注册系统服务则自动重启
 ```
 
-数据库结构会在下次启动时自动迁移；仅当设置向导提示需要迁移时才运行 `octop init`。跨版本升级前请务必先备份（`octop backup`）。
+数据库结构会在下次启动时自动迁移；仅当设置向导提示需要迁移时才运行 `xyb-octop init`。跨版本升级前请务必先备份（`xyb-octop backup`）。
 
 ## ⚙️ 配置
 
@@ -363,27 +363,27 @@ octop update          # 获取并安装最新版 小胰宝，若已注册系统�
 
 ```bash
 # LLM 供应商与模型
-octop models
-octop provider list
+xyb-octop models
+xyb-octop provider list
 
 # IM 通道
-octop channel list
-octop channel install
+xyb-octop channel list
+xyb-octop channel install
 
 # Skill（按 Agent）
-octop skills list --agent main
+xyb-octop skills list --agent main
 
 # 定时任务
-octop cron list
-octop cron create --help
+xyb-octop cron list
+xyb-octop cron create --help
 
 # 用户（管理员）
-octop user list
+xyb-octop user list
 ```
 
 ### 支持的 LLM 供应商
 
-OpenAI 兼容 API、DashScope（千问）、Ollama 等预设 — 在控制台或通过 `octop provider` 按 Agent 配置。
+OpenAI 兼容 API、DashScope（千问）、Ollama 等预设 — 在控制台或通过 `xyb-octop provider` 按 Agent 配置。
 
 ### 支持的通道
 
@@ -404,9 +404,9 @@ OpenAI 兼容 API、DashScope（千问）、Ollama 等预设 — 在控制台或
 用一条命令为某个用户播种：
 
 ```bash
-octop xyb init-mcp --user admin            # 只增不改，可重复执行
-octop xyb init-mcp --user admin --dry-run  # 只打印计划，不写入
-octop xyb init-mcp --user admin --only xyb-veeva
+xyb-octop xyb init-mcp --user admin            # 只增不改，可重复执行
+xyb-octop xyb init-mcp --user admin --dry-run  # 只打印计划，不写入
+xyb-octop xyb init-mcp --user admin --only xyb-veeva
 ```
 
 | 服务 | 通道 | 传输 | 前置条件 |
@@ -449,24 +449,24 @@ scripts/xyb-check-mcp.sh --json      # 机器可读报告
 
 | 命令 | 说明 |
 |------|------|
-| `octop init` | 初始化 `~/.octop/`（数据库、管理员、JWT 密钥） |
-| `octop run` | 前台启动 小胰宝 |
-| `octop service start` | 安装并启动系统服务 |
-| `octop service stop` | 停止系统服务 |
-| `octop agent` | 创建、列出、启停 Agent |
-| `octop channel` | 安装与管理 IM 通道 |
-| `octop chats` | REPL 与会话管理 |
-| `octop acp` | 为 IDE 提供 stdio ACP 服务 |
-| `octop cron` | 管理定时任务 |
-| `octop models` | 供应商预设与模型解析 |
-| `octop skills` | 按 Agent 启用/禁用 Skill |
-| `octop plugin` | 安装并管理第三方插件 |
-| `octop backup` | 导出 / 恢复备份 |
-| `octop clean` | 清理 CLI 状态或清空 `~/.octop/` |
-| `octop memory list` | 列出可参与记忆维护的运行中 Agent；不改动数据库。 |
-| `octop memory slim [--agent ID]` | 通过运行中的宿主备份并精简 SQLite 记忆；使用指定 Agent 或按提示选择。在终端与控制台显示进度。[详情](docs/memory-slim.md) |
-| `octop memory slim --all` | 依次维护所有符合条件的运行中 Agent，逐个显示进度；首个失败即停止。 |
-| `octop update` | 检查并安装更新 |
+| `xyb-octop init` | 初始化 `~/.octop/`（数据库、管理员、JWT 密钥） |
+| `xyb-octop run` | 前台启动 小胰宝 |
+| `xyb-octop service start` | 安装并启动系统服务 |
+| `xyb-octop service stop` | 停止系统服务 |
+| `xyb-octop agent` | 创建、列出、启停 Agent |
+| `xyb-octop channel` | 安装与管理 IM 通道 |
+| `xyb-octop chats` | REPL 与会话管理 |
+| `xyb-octop acp` | 为 IDE 提供 stdio ACP 服务 |
+| `xyb-octop cron` | 管理定时任务 |
+| `xyb-octop models` | 供应商预设与模型解析 |
+| `xyb-octop skills` | 按 Agent 启用/禁用 Skill |
+| `xyb-octop plugin` | 安装并管理第三方插件 |
+| `xyb-octop backup` | 导出 / 恢复备份 |
+| `xyb-octop clean` | 清理 CLI 状态或清空 `~/.octop/` |
+| `xyb-octop memory list` | 列出可参与记忆维护的运行中 Agent；不改动数据库。 |
+| `xyb-octop memory slim [--agent ID]` | 通过运行中的宿主备份并精简 SQLite 记忆；使用指定 Agent 或按提示选择。在终端与控制台显示进度。[详情](docs/memory-slim.md) |
+| `xyb-octop memory slim --all` | 依次维护所有符合条件的运行中 Agent，逐个显示进度；首个失败即停止。 |
+| `xyb-octop update` | 检查并安装更新 |
 
 在已登录的 Web 控制台或本地 CLI 聊天中，`/memory slim` 会说明当前 Agent 的维护方式；
 `/memory slim --all` 列出符合条件的 Agent。审阅影响后加 `--confirm` 开始维护。
@@ -477,7 +477,7 @@ scripts/xyb-check-mcp.sh --json      # 机器可读报告
 
 ## 🖥️ Web 控制台
 
-`octop run` 启动后访问 **http://127.0.0.1:8088**。
+`xyb-octop run` 启动后访问 **http://127.0.0.1:8088**。
 
 <p align="center">
   <img src="docs/assets/readme-chat-zh.png" alt="小胰宝 Web 控制台" width="800" />

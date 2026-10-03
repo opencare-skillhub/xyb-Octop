@@ -12,7 +12,7 @@
 
 > 请把本机的 ctv-mcp-server（源码目录由 `XYB_VEEVA_DIR` 指定，默认 `~/Downloads/ctv-mcp-server`）
 > 作为本地 stdio MCP 接入小胰宝 Octop：先确认该目录下 `dist/index.js` 已构建、`node` 可解析，
-> 再运行 `octop xyb init-mcp --user admin` 完成播种（需要 root 权限时先说明），
+> 再运行 `xyb-octop xyb init-mcp --user admin` 完成播种（需要 root 权限时先说明），
 > 然后用 `scripts/xyb-check-mcp.sh` 做一次真实 MCP 握手校验，确认 `xyb-veeva` 能列出 12 个工具，
 > 最后报告实际新增的 server 名、通道与工具数；前置条件不满足的服务要如实报告原因，
 > 不要静默跳过，也不要修改任何我没让你改的配置。
@@ -24,14 +24,14 @@
 | 约束 | 防的是什么 |
 |------|-----------|
 | 先确认 `dist/index.js` 与 `node` | 播种器对未构建的 veeva 会报 `unbuilt` 而非写坏命令，但 AI 容易跳过这一步直接说"装好了" |
-| 用 `octop xyb init-mcp` 而不是手写 JSON | 手写会绕过"只增不改"与前置条件检查，还可能起错名字造成重复挂载 |
+| 用 `xyb-octop xyb init-mcp` 而不是手写 JSON | 手写会绕过"只增不改"与前置条件检查，还可能起错名字造成重复挂载 |
 | 要求如实报告跳过项 | `xyb-metaso` 缺 `METASO_API_KEY` 时会被跳过，AI 通常只报成功的那几个 |
 
 ---
 
 ## 二、背景：播种器解决什么问题
 
-`octop xyb init-mcp` 把 `src/octop/infra/connectors/xyb_defaults.py` 里声明的服务
+`xyb-octop xyb init-mcp` 把 `src/octop/infra/connectors/xyb_defaults.py` 里声明的服务
 写进当前用户的 `custom-mcp` 连接器文档。这个文档是**整份覆盖**写入的，
 所以播种器有三条刻意设计的行为：
 
@@ -58,8 +58,8 @@ node --version
 ### 步骤 2：先看计划，再写入
 
 ```bash
-octop xyb init-mcp --user admin --dry-run   # 只打印，不写入
-octop xyb init-mcp --user admin             # 真正写入
+xyb-octop xyb init-mcp --user admin --dry-run   # 只打印，不写入
+xyb-octop xyb init-mcp --user admin             # 真正写入
 ```
 
 期望看到 6 行计划：
@@ -73,7 +73,7 @@ octop xyb init-mcp --user admin             # 真正写入
 | `xyb-metaso` | search | **skip**（缺 `METASO_API_KEY`） |
 | `xyb-dayi` | drug-search | add |
 
-> `--user` 可省略，省略时用 `octop config set-user` 固定的用户。
+> `--user` 可省略，省略时用 `xyb-octop config set-user` 固定的用户。
 > 只想补一个服务就加 `--only xyb-veeva`。
 
 ### 步骤 3：让运行中的服务感知变更
@@ -82,7 +82,7 @@ octop xyb init-mcp --user admin             # 真正写入
 
 ```bash
 curl -X POST http://127.0.0.1:8088/api/plugins/reload   # 仅插件用
-# 连接器变更由 PUT/PATCH 自动调度重载；必要时重启 octop run
+# 连接器变更由 PUT/PATCH 自动调度重载；必要时重启 xyb-octop run
 ```
 
 ### 步骤 4：真实握手校验
@@ -119,8 +119,8 @@ passed=1 failed=0 skipped=0
 curl -s http://127.0.0.1:8088/api/connectors/custom-mcp -H "Authorization: Bearer $TOKEN"
 
 # 2. 播种
-octop xyb init-mcp --user admin --dry-run
-octop xyb init-mcp --user admin
+xyb-octop xyb init-mcp --user admin --dry-run
+xyb-octop xyb init-mcp --user admin
 
 # 3. 图形界面
 #    控制台 → 连接器 → 自定义 MCP
@@ -168,7 +168,7 @@ MCPToolMiddleware filter: mcp_servers=['xyb-veeva'] active=['xyb-veeva'] mcp=12-
 让它跑一个只读工具（不会改数据）：
 
 ```bash
-octop chats send --agent main --plain "调用 get_index_stats，报出 CTV 本地索引的记录数与详情覆盖数。"
+xyb-octop chats send --agent main --plain "调用 get_index_stats，报出 CTV 本地索引的记录数与详情覆盖数。"
 ```
 
 期望返回真实数字（如"记录数 210、已补全 20"）。**这一步才证明整条链路通了。**
@@ -183,7 +183,7 @@ octop chats send --agent main --plain "调用 get_index_stats，报出 CTV 本�
 | 探测 `ok: false`，命令找不到 | Octop 进程 PATH 里没有 `node` | 把 `command` 换成 node 绝对路径（`which node` 的结果） |
 | 探测报 `server closed stdout before replying` | `npx -y <包名>` 无法确定跑哪个 bin —— 该包有多个 bin，或唯一的 bin 名字不等于包名 | 用 `npx -y -p <包名> <bin名>`；bin 名用 `npm view <包名> bin` 查（`xyb-metaso` 就是这种情况：包名 `metaso-search-mcp`，bin 是 `metaso-mcp`） |
 | 探测 `ok: false`，模块加载失败 | `better-sqlite3` 的 ABI 与当前 node 不匹配 | 用与构建时同一个 node，或在该 node 下 `npm rebuild better-sqlite3` |
-| 对话里没有该工具 | `default_open` 没生效，或服务未重载 | 检查配置里的 `default_open`，重启 `octop run` |
+| 对话里没有该工具 | `default_open` 没生效，或服务未重载 | 检查配置里的 `default_open`，重启 `xyb-octop run` |
 | `search_studies` 搜不到东西 | 本地索引是空的或覆盖不全 | 先跑 `import_csv_export` 或 `sync_sitemap` 建库，再 `backfill_details` 补详情 |
 | 模型报 `Model does not exist` | 模型引用把 provider 前缀带进了模型 id | 显式指定模型绕过，如 `--model "SiliconFlow (China)/deepseek-ai/DeepSeek-V3.2"` |
 
